@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Un espacio para ganar soltura en español. Lecciones B1, B2 y C1, práctica oral, escucha y modelos oficiales DELE.">
+  <meta name="theme-color" content="#224b3c"><title>Denali Spanish · Hablar con soltura</title>
+  <link rel="icon" href="./icon.svg" type="image/svg+xml"><link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <a href="#main" class="skip">Saltar al contenido</a>
+  <aside class="sidebar" aria-label="Navegación principal">
+    <a class="brand" href="#home"><span class="brand-icon">d.</span><span>denali<span class="brand-sub">SPANISH STUDIO</span></span></a>
+    <p class="nav-label">TU ESPACIO DE ESPAÑOL</p>
+    <nav id="navigation">
+      <a href="#home" data-nav="home"><span aria-hidden="true">⌂</span> Mi estudio</a>
+      <a href="#route" data-nav="route"><span aria-hidden="true">▤</span> Ruta de aprendizaje</a>
+      <a href="#conversation" data-nav="conversation"><span aria-hidden="true">◌</span> Conversación</a>
+      <a href="#listening" data-nav="listening"><span aria-hidden="true">♫</span> Escucha y lectura</a>
+      <a href="#exams" data-nav="exams"><span aria-hidden="true">✓</span> Controles DELE</a>
+      <a href="#notebook" data-nav="notebook"><span aria-hidden="true">✎</span> Mi cuaderno</a>
+    </nav>
+    <div class="sidebar-bottom"><span class="small-badge">A TU RITMO</span><p>Un poco de español.<br>Un poco más de confianza.</p><a href="#method">Cómo usar este espacio ↗</a></div>
+  </aside>
+  <div class="workspace">
+    <header class="topbar"><span class="topbar-text">Aprender para vivir en español</span><div class="topbar-controls"><label for="level">Mi ruta</label><select id="level"><option>B1</option><option>B2</option><option>C1</option></select><button id="help-toggle" class="text-button" aria-pressed="false" title="Mostrar ayudas en inglés">EN help</button></div></header>
+    <main id="main" tabindex="-1"></main>
+    <footer>Hecho para practicar, equivocarse y seguir. <a href="#sources">Fuentes y alcance</a><span>El progreso se guarda en este navegador.</span></footer>
+  </div>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
