@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import {lessons,sources} from '../dist/content.js';
 import {library,exams,rubric} from '../dist/practice.js';
 import {grade,consolidated,freshState,validateState,escapeHtml} from '../dist/core.js';
+import {grammarBank,grammarTopics,grammarItems,gradeGrammar,normalizeAnswer,isCorrect,areaNames} from '../dist/grammar.js';
 test('El curso incluye tres rutas, material completo y preguntas coherentes',()=>{
  assert.equal(lessons.length,26);assert.equal(new Set(lessons.map(l=>l.id)).size,26);
  for(const level of ['B1','B2','C1'])assert.ok(lessons.filter(l=>l.level===level).length>=8);
@@ -14,13 +15,14 @@ test('La corrección distingue todo correcto, todo incorrecto e incompleto',()=>
  for(const lesson of lessons){assert.equal(grade(lesson.quiz,lesson.quiz.map(q=>q.answer)).percent,100);assert.equal(grade(lesson.quiz,lesson.quiz.map(q=>(q.answer+1)%3)).percent,0);}
  assert.throws(()=>grade(lessons[0].quiz,[]));assert.throws(()=>grade(lessons[0].quiz,[0,1,2,3,0,1]));
 });
-test('La consolidación exige comprensión, cinco dimensiones orales y escritura revisada',()=>{
+test('El avance de ejercicios no exige autoevaluación oral ni redacción',()=>{
  const state=freshState(),id=lessons[0].id;assert.equal(consolidated(state,id),false);
- state.results[id]={percent:100};assert.equal(consolidated(state,id),false);
- state.ratings[id]=[3,3,3,3,2];state.reviewed[id]=true;assert.equal(consolidated(state,id),false);
+ state.results[id]={percent:100};assert.equal(consolidated(state,id),true);
+ state.ratings[id]=[3,3,3,3,2];state.reviewed[id]=true;assert.equal(consolidated(state,id),true);
  state.ratings[id]=[3,3,3,3,3];assert.equal(consolidated(state,id),true);
  state.results[id].percent=79;assert.equal(consolidated(state,id),false);
  state.ratings[id]=[];assert.equal(consolidated(state,id),false);
+ state.results[id].percent=80;state.reviewed[id]=false;assert.equal(consolidated(state,id),true);
 });
 test('Las copias no confían en puntuaciones o campos arbitrarios',()=>{
  const state=freshState(),id=lessons[0].id;state.results[id]={correct:4,total:6,percent:100,attempts:2};state.drafts[id]='<script>alert(1)</script>';state.ratings[id]=[5,5,5,5,5];
@@ -35,4 +37,32 @@ test('Referencias, modelos y estructura coinciden con las fuentes consultadas',(
 test('La aplicación usa rutas y activos relativos compatibles con GitHub Pages',()=>{
  const html=fs.readFileSync(new URL('../dist/index.html',import.meta.url),'utf8');assert.match(html,/lang="es"/);assert.match(html,/src="\.\/app.js"/);assert.match(html,/href="\.\/style.css"/);
  const app=fs.readFileSync(new URL('../dist/app.js',import.meta.url),'utf8');assert.ok(!app.includes('fetch('));
+});
+test('Tres controles originales tienen 24 preguntas, áreas y unidades de repaso válidas',()=>{
+ assert.equal(grammarTopics.length,12);const all=Object.values(grammarBank).flat();assert.equal(new Set(all.map(q=>q.id)).size,72);
+ for(const [level,items] of Object.entries(grammarBank)){
+  assert.equal(items.length,24);assert.equal(items.filter(q=>q.accepted).length,6);
+  const answers=items.map(q=>q.options?q.answer:q.accepted[0]);assert.equal(gradeGrammar(items,answers).percent,100);
+  for(const q of items){assert.ok(areaNames[q.area]);assert.ok(lessons.some(l=>l.id===q.unit));assert.ok(q.why.length>40);if(q.options)assert.equal(new Set(q.options).size,3);else assert.ok(q.accepted.every(a=>a.trim()));}
+  const areas=[...new Set(items.map(q=>q.area))];for(const area of areas){assert.ok(grammarItems(`grammar/${level}/${area}`).every(q=>q.area===area));}
+  assert.deepEqual(grammarItems(`grammar/${level}`),items);
+ }
+ assert.deepEqual(grammarItems('grammar/unknown'),[]);
+ for(const t of grammarTopics)assert.ok(t.rule&&t.trap&&t.strategy&&t.examples.length>=3&&lessons.some(l=>l.id===t.unit));
+});
+test('El corrector escrito respeta tildes y ñ y admite variantes explícitas',()=>{
+ assert.equal(normalizeAnswer('  HABÍA. '),'había');assert.notEqual(normalizeAnswer('ano'),normalizeAnswer('año'));
+ assert.equal(normalizeAnswer('habi\u0301a'),normalizeAnswer('había'));
+ const q=grammarBank.B2.find(q=>q.accepted?.includes('llamase'));assert.equal(isCorrect(q,'LLAMASE.'),true);assert.equal(isCorrect(q,'llamara'),true);
+ const accent=grammarBank.B1.find(q=>q.accepted?.includes('viajaría'));assert.equal(isCorrect(accent,'viajaria'),false);
+ const items=grammarBank.B1,answers=items.map(q=>q.options?q.answer:q.accepted[0]);answers[0]=(items[0].answer+1)%3;answers[3]='caros';
+ const result=gradeGrammar(items,answers);assert.equal(result.correct,22);assert.deepEqual(result.areas.base,{correct:2,total:4});
+ assert.throws(()=>gradeGrammar(items,[]));answers[3]=' ';assert.throws(()=>gradeGrammar(items,answers));
+});
+test('Historial de gramática recalculado y copias antiguas compatibles',()=>{
+ const state=freshState(),answers=grammarBank.B1.map(q=>q.options?q.answer:q.accepted[0]);answers[0]=(answers[0]+1)%3;
+ state.grammarResults.B1=Array.from({length:12},()=>({answers,correct:24,percent:100,areas:{},date:'2026-10-10'}));
+ let clean=validateState(state,lessons.map(l=>l.id));assert.equal(clean.grammarResults.B1.length,10);assert.equal(clean.grammarResults.B1[0].correct,23);assert.equal(clean.grammarResults.B1[0].areas.base.correct,3);
+ state.grammarResults.B2=[{answers:[],percent:100}];clean=validateState(state,[]);assert.deepEqual(clean.grammarResults.B2,[]);
+ delete state.grammarResults;assert.deepEqual(validateState(state,[]).grammarResults,{});
 });

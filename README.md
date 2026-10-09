@@ -5,7 +5,9 @@ Una web de estudio de español para ganar soltura, con rutas abiertas B1, B2 y C
 ## Qué incluye
 
 - 26 unidades completas con explicación, ejemplos, ayuda breve en inglés y frases reutilizables.
-- 156 preguntas de unidad y 24 de comprensión con corrección explicada.
+- 252 preguntas con explicación: 156 de unidad, 24 de comprensión y 72 de gramática.
+- Taller de gramática con 12 fichas, controles B1/B2/C1 de 24 preguntas, formas escritas, resultados por tema, enlaces de repaso y diez últimos intentos completos.
+- Avance por ≥80% en ejercicios de unidad; conversación y escritura opcionales. El indicador mide el cuestionario, no el dominio de la habilidad.
 - 6 textos originales para lectura o escucha con síntesis de voz del navegador.
 - 12 temas de conversación adaptados a tres dificultades, temporizador y grabación descargable.
 - Tareas escritas, ejemplos, borradores, rúbrica oral y 12 fichas de consulta.
@@ -49,4 +51,4 @@ Estructura y enlaces consultados el 9 de octubre de 2026. C1 utiliza el modelo d
 
 ## Mantener el contenido
 
-`dist/content.js` contiene las unidades; `dist/practice.js`, biblioteca, temas y referencias rápidas. `dist/core.js` concentra corrección, criterios de consolidación y validación de copias. `dist/app.js` contiene la interfaz. No añadas datos personales de la estudiante al código publicado.
+`dist/content.js` contiene las unidades; `dist/practice.js`, biblioteca, temas y referencias rápidas. `dist/grammar.js` contiene el taller, sus bancos y la corrección de formas escritas. `dist/core.js` concentra corrección, criterios de consolidación y validación de copias. `dist/app.js` contiene la interfaz. No añadas datos personales de la estudiante al código publicado.

@@ -1,12 +1,13 @@
+import {grammarBank,gradeGrammar} from './grammar.js';
 export const STORAGE_KEY='denali-spanish-v1';
-export const freshState=()=>({version:1,level:'B1',english:false,results:{},ratings:{},drafts:{},reviewed:{},notes:'',examResults:{},lastLesson:null});
+export const freshState=()=>({version:1,level:'B1',english:false,results:{},ratings:{},drafts:{},reviewed:{},notes:'',examResults:{},grammarResults:{},lastLesson:null});
 export const escapeHtml=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function grade(items,answers){
   if(items.length!==answers.length||answers.some((a,i)=>!Number.isInteger(a)||a<0||a>=items[i].options.length)) throw new Error('Responde a todas las preguntas.');
   const correct=items.reduce((sum,item,i)=>sum+(answers[i]===item.answer?1:0),0);
   return {correct,total:items.length,percent:Math.round(100*correct/items.length),answers};
 }
-export function consolidated(state,id){return (state.results[id]?.percent??0)>=80&&state.ratings[id]?.length===5&&state.ratings[id].every(n=>n>=3)&&state.reviewed[id]===true;}
+export function consolidated(state,id){return (state.results[id]?.percent??0)>=80;}
 export function validateState(data,ids){
   if(!data||data.version!==1||!['B1','B2','C1'].includes(data.level))throw new Error('El archivo no es una copia compatible de Denali.');
   const clean=freshState();clean.level=data.level;clean.english=data.english===true;
@@ -26,6 +27,13 @@ export function validateState(data,ids){
   for(const level of ['B1','B2','C1']){
     const item=data.examResults?.[level];
     if(item&&typeof item==='object')clean.examResults[level]={reading:typeof item.reading==='number'?Math.max(0,Math.min(40,item.reading)):0,listening:typeof item.listening==='number'?Math.max(0,Math.min(30,item.listening)):0,notes:typeof item.notes==='string'?item.notes.slice(0,10000):'',model:typeof item.model==='string'?item.model.slice(0,300):''};
+    const history=data.grammarResults?.[level];
+    if(Array.isArray(history))clean.grammarResults[level]=history.slice(-10).flatMap(attempt=>{
+      try{if(!attempt||!Array.isArray(attempt.answers)||attempt.answers.some(a=>typeof a==='string'&&a.length>100))return [];
+        const result=gradeGrammar(grammarBank[level],attempt.answers);
+        return [{...result,date:typeof attempt.date==='string'?attempt.date.slice(0,40):''}];
+      }catch{return [];}
+    });
   }
   return clean;
 }
