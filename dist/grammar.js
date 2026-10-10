@@ -1,5 +1,5 @@
-import {extraTopics,extraDrills} from './extra.js?v=c83be0575754';
-import {a2Grammar,a2Topics,a2AreaNames} from './a2.js?v=c83be0575754';
+import {extraTopics,extraDrills} from './extra.js?v=ff50ceb8ba34';
+import {a2Grammar,a2Topics,a2AreaNames} from './a2.js?v=ff50ceb8ba34';
 export {extraDrills};
 // Material original de práctica: no son preguntas DELE ni una prueba de nivel validada.
 const mc=(area,unit,prompt,answer,other,why)=>({area,unit,prompt,options:[answer,...other],answer:0,why});

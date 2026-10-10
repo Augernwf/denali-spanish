@@ -1,4 +1,4 @@
-import {a2Drills} from './a2.js?v=c83be0575754';
+import {a2Drills} from './a2.js?v=ff50ceb8ba34';
 // Additional original practice, kept separate from the existing exam bank.
 const choice=(area,unit,prompt,answer,other,why,whyEn)=>({area,unit,prompt,options:[answer,...other],answer:0,why,whyEn});
 const form=(area,unit,prompt,accepted,why,whyEn)=>({area,unit,prompt,accepted,why,whyEn});

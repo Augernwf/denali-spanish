@@ -1,4 +1,4 @@
-import {a2LessonEnglish,a2Grammar} from './a2.js?v=c83be0575754';
+import {a2LessonEnglish,a2Grammar} from './a2.js?v=ff50ceb8ba34';
 // English explanations are study aids, not an alternative answer key.
 export const lessonEnglish={
  'b1-base':[

@@ -7,6 +7,7 @@ import {grade,consolidated,freshState,validateState,escapeHtml} from '../dist/co
 import {grammarBank,grammarTopics,grammarItems,gradeGrammar,normalizeAnswer,isCorrect,areaNames} from '../dist/grammar.js';
 import {extraDrills,extraLibrary} from '../dist/extra.js';
 import {lessonEnglish,topicEnglish,examEnglish,questionEnglish} from '../dist/bilingual.js';
+import {visualTopics,visualCard,visualPage} from '../dist/visuals.js';
 test('El curso incluye cuatro rutas, material completo y preguntas coherentes',()=>{
  assert.equal(lessons.length,36);assert.equal(new Set(lessons.map(l=>l.id)).size,36);
  for(const level of ['A2','B1','B2','C1'])assert.ok(lessons.filter(l=>l.level===level).length>=8);
@@ -100,4 +101,10 @@ test('A2 conserva progreso, lecturas e historial sin romper las copias B1 anteri
  const clean=validateState(a2,lessons.map(l=>l.id));assert.equal(clean.level,'A2');assert.equal(clean.lastLesson,a2.lastLesson);assert.equal(clean.notes,a2.notes);assert.equal(clean.drafts['lib-a2-2'],a2.drafts['lib-a2-2']);assert.equal(clean.results['a2-identidad'].percent,83);assert.equal(clean.grammarResults.A2[0].percent,100);assert.equal(clean.drillResults.A2.percent,100);assert.equal(clean.examResults.A2.reading,25);assert.equal(clean.examResults.A2.listening,25);
  const old=freshState();old.results['b1-base']={correct:6,total:6};old.notes='Antes de añadir A2';assert.equal(validateState(old,lessons.map(l=>l.id)).results['b1-base'].percent,100);assert.equal(validateState(old,[]).notes,old.notes);
  assert.equal(exams.A2.reading,25);assert.equal(exams.A2.listening,25);assert.deepEqual(exams.A2.times,[60,40,45,12]);assert.equal(exams.A2.prep,12);
+});
+test('Los esquemas tienen rutas válidas y distinguen las dos frases de las fotos',()=>{
+ assert.equal(visualTopics.length,6);assert.equal(new Set(visualTopics.map(t=>t.id)).size,6);
+ for(const topic of visualTopics){assert.ok(lessons.some(l=>l.id===topic.unit));assert.ok(lessons.some(l=>l.id===topic.bridge));assert.ok(topic.scenes.length>=2);for(const scene of topic.scenes){assert.ok(scene.sentence&&scene.explanation&&scene.english);assert.ok(scene.parts.every(([word,label])=>word&&label));}}
+ const photos=visualTopics.find(t=>t.id==='pronouns');assert.equal(photos.scenes[0].sentence,'Yo las envié ayer a Ana.');assert.equal(photos.scenes[1].sentence,'Yo se las envié ayer a Ana.');assert.match(visualCard(photos,1),/data-scene="1" aria-pressed="true"/);assert.ok(visualCard(photos,999).includes('Yo las envié ayer a Ana.'));
+ const unsafe={...photos,title:'<script>test</script>'};assert.ok(!visualCard(unsafe).includes('<script>'));const page=visualPage(()=> '');for(const topic of visualTopics)assert.ok(page.includes(`href="#visual/${topic.id}"`));
 });

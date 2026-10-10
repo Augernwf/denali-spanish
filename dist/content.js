@@ -1,4 +1,4 @@
-import {a2Lessons} from './a2.js?v=c83be0575754';
+import {a2Lessons} from './a2.js?v=ff50ceb8ba34';
 // Todo el material didáctico de estas unidades es original. Referencias oficiales al final.
 export const section=(title,text,examples=[])=>({title,text,examples});
 export const question=(prompt,correct,others,why)=>({prompt,options:[correct,...others],answer:0,why});
@@ -248,6 +248,7 @@ quiz:[q('Me ___ los plazos tan cortos.','preocupan',['preocupa','preocupáis'],'
 speak:'Cuenta una situación que te pone nerviosa y otra en la que te sientes cómoda. Tu compañero comparte una dificultad y tú respondes mostrando comprensión antes de proponer ayuda.',write:'Escribe 180 palabras sobre cómo ha cambiado tu confianza al hablar español. Incluye sensaciones, causas y una relación que haya ayudado a practicar.',model:'Antes me daba vergüenza preguntar cuando no entendía algo. Me preocupaba que las demás personas perdieran la paciencia. Ahora me siento más cómoda y tengo ganas de participar. Me llevo bien con mis compañeras y me alegra que me den tiempo para explicar mis ideas. Todavía me resulta difícil seguir conversaciones de grupo, pero puedo pedir una aclaración.'});
 
 // Rotación determinista de opciones para que la respuesta no ocupe siempre el mismo lugar.
+for(const [id,visual] of Object.entries({'b1-base':'identity','b1-presente':'gustar','b1-pasados':'time','b1-pronombres':'pronouns'}))lessons.find(l=>l.id===id).visual=visual;
 lessons.push(...a2Lessons);
 lessons.forEach((lesson,i)=>lesson.quiz.forEach((item,j)=>{
   const shift=(i+j)%item.options.length;
