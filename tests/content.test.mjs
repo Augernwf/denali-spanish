@@ -37,8 +37,13 @@ test('Referencias, modelos y estructura coinciden con las fuentes consultadas',(
  assert.equal(library.length,12);assert.ok(library.every(l=>l.questions.length>=4&&l.text.split(/\s+/).length>=150));
 });
 test('La aplicación usa rutas y activos relativos compatibles con GitHub Pages',()=>{
- const html=fs.readFileSync(new URL('../dist/index.html',import.meta.url),'utf8');assert.match(html,/lang="es"/);assert.match(html,/src="\.\/app.js"/);assert.match(html,/href="\.\/style.css"/);
+ const html=fs.readFileSync(new URL('../dist/index.html',import.meta.url),'utf8');assert.match(html,/lang="es"/);assert.match(html,/src="\.\/app.js(?:\?v=[\w-]+)?"/);assert.match(html,/href="\.\/style.css(?:\?v=[\w-]+)?"/);
  const app=fs.readFileSync(new URL('../dist/app.js',import.meta.url),'utf8');assert.ok(!app.includes('fetch('));
+});
+test('Todos los módulos publicados utilizan la misma versión de activos',()=>{
+ const root=new URL('../dist/',import.meta.url),html=fs.readFileSync(new URL('index.html',root),'utf8'),version=html.match(/app\.js\?v=([\w-]+)/)?.[1];assert.ok(version);
+ assert.ok(html.includes(`style.css?v=${version}`));
+ for(const file of fs.readdirSync(root).filter(n=>n.endsWith('.js'))){const text=fs.readFileSync(new URL(file,root),'utf8');for(const match of text.matchAll(/from\s+['"]\.\/([\w.-]+\.js)(?:\?v=([\w-]+))?['"]/g)){assert.equal(match[2],version,`${file} imports ${match[1]}`);assert.ok(fs.existsSync(new URL(match[1],root)));}}
 });
 test('Tres controles originales tienen 24 preguntas, áreas y unidades de repaso válidas',()=>{
  assert.equal(grammarTopics.length,18);const all=Object.values(grammarBank).flat();assert.equal(new Set(all.map(q=>q.id)).size,72);

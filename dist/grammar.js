@@ -1,4 +1,4 @@
-import {extraTopics,extraDrills} from './extra.js';
+import {extraTopics,extraDrills} from './extra.js?v=b380da2c95bc';
 export {extraDrills};
 // Material original de práctica: no son preguntas DELE ni una prueba de nivel validada.
 const mc=(area,unit,prompt,answer,other,why)=>({area,unit,prompt,options:[answer,...other],answer:0,why});

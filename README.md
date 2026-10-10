@@ -35,6 +35,8 @@ npm test
 
 El directorio publicable es `dist`. El workflow de `.github/workflows/pages.yml` ejecuta las pruebas y publica ese directorio. En **Settings → Pages → Build and deployment**, selecciona **GitHub Actions**. El workflow usa el entorno `github-pages` y los permisos mínimos de lectura de contenido, escritura de Pages y emisión del token de identidad de despliegue.
 
+Antes de las pruebas del despliegue se ejecuta `node tools/version-assets.mjs`. Asigna una versión derivada del contenido a CSS y módulos JavaScript para que una recarga obtenga la actualización completa. Al cambiar activos localmente, ejecuta también este comando antes de `npm test`.
+
 La URL será `https://<usuario>.github.io/denali-spanish/` si el repositorio tiene ese nombre. Todos los activos usan rutas relativas. No se necesitan claves, servidor ni servicios de pago.
 
 ## Datos personales
