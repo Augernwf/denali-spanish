@@ -1,3 +1,4 @@
+import {a2Lessons} from './a2.js?v=c83be0575754';
 // Todo el material didáctico de estas unidades es original. Referencias oficiales al final.
 export const section=(title,text,examples=[])=>({title,text,examples});
 export const question=(prompt,correct,others,why)=>({prompt,options:[correct,...others],answer:0,why});
@@ -247,6 +248,7 @@ quiz:[q('Me ___ los plazos tan cortos.','preocupan',['preocupa','preocupáis'],'
 speak:'Cuenta una situación que te pone nerviosa y otra en la que te sientes cómoda. Tu compañero comparte una dificultad y tú respondes mostrando comprensión antes de proponer ayuda.',write:'Escribe 180 palabras sobre cómo ha cambiado tu confianza al hablar español. Incluye sensaciones, causas y una relación que haya ayudado a practicar.',model:'Antes me daba vergüenza preguntar cuando no entendía algo. Me preocupaba que las demás personas perdieran la paciencia. Ahora me siento más cómoda y tengo ganas de participar. Me llevo bien con mis compañeras y me alegra que me den tiempo para explicar mis ideas. Todavía me resulta difícil seguir conversaciones de grupo, pero puedo pedir una aclaración.'});
 
 // Rotación determinista de opciones para que la respuesta no ocupe siempre el mismo lugar.
+lessons.push(...a2Lessons);
 lessons.forEach((lesson,i)=>lesson.quiz.forEach((item,j)=>{
   const shift=(i+j)%item.options.length;
   item.options=[...item.options.slice(shift),...item.options.slice(0,shift)];
@@ -259,6 +261,10 @@ export const sources=[
 {title:'Modelos administrados de exámenes DELE',url:'https://examenes.cervantes.es/es/dele/preparar-prueba/modelos-examen',note:'Cuadernillos y claves de convocatorias anteriores. Usar un modelo distinto para comprobar transferencia.'},
 {title:'Preparación oficial y audios',url:'https://examenes.cervantes.es/es/dele/preparar-prueba',note:'Acceso a materiales oficiales. Comprueba que el audio y el cuadernillo pertenecen al mismo modelo.'},
 {title:'Calificación oficial del DELE',url:'https://examenes.cervantes.es/es/dele/como',note:'En B1, B2 y C1 se requieren 30 de 50 puntos en cada grupo: lectura + escritura y escucha + oral.'}
+,
+{title:'Inventario de gramática A1–A2 del Instituto Cervantes',url:'https://cvc.cervantes.es/ensenanza/biblioteca_ele/plan_curricular/niveles/02_gramatica_inventario_a1-a2.htm',note:'Referencia curricular para seleccionar las bases de A2; las explicaciones y ejercicios de esta web son originales.'},
+{title:'DELE A2: formato y modelo desde 2020',url:'https://examenes.cervantes.es/a1a2/profesionales/a2.htm',note:'Modelo oficial, especificaciones y acceso al audio. Lectura y escucha: 25 preguntas cada una. Consultado el 10 de octubre de 2026.'},
+{title:'RAE: pronombres personales átonos',url:'https://www.rae.es/dpd/pronombres%20personales%20%C3%A1tonos',note:'Referencia para posición y combinación de pronombres y duplicación de complementos. Revisión B1: se aceptan las y se las en la pregunta de las fotos.'}
 ];
 
 

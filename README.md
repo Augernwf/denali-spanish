@@ -1,18 +1,18 @@
 # Denali Spanish
 
-Una web de estudio de español para ganar soltura, con rutas abiertas B1, B2 y C1.
+Una web de estudio de español para ganar soltura, con rutas abiertas A2, B1, B2 y C1.
 
 ## Qué incluye
 
-- 26 unidades completas con explicación, ejemplos, ayuda breve en inglés y frases reutilizables.
-- 324 preguntas con explicación: 156 de unidad, 60 de comprensión, 72 de examen de gramática y 36 de práctica extra.
-- Taller de gramática con 18 fichas bilingües, controles B1/B2/C1 de 24 preguntas, formas escritas, resultados por tema, enlaces de repaso y diez últimos intentos completos.
+- 36 unidades completas: diez nuevas de A2 y las 26 de B1–C1. Explicaciones, ejemplos, inglés y frases reutilizables.
+- 440 preguntas con explicación: 216 de unidad, 80 de comprensión, 96 de examen de gramática y 48 de práctica extra.
+- Taller de gramática con 26 fichas bilingües, controles A2/B1/B2/C1 de 24 preguntas, formas escritas, resultados por tema, enlaces de repaso y diez últimos intentos completos.
 - Avance por ≥80% en ejercicios de unidad; conversación y escritura opcionales. El indicador mide el cuestionario, no el dominio de la habilidad.
-- 12 textos originales para lectura o escucha con síntesis de voz del navegador; seis nuevos con traducción completa al inglés y vocabulario.
-- Ayudas en inglés en las 78 secciones de las 26 unidades, instrucciones, fichas y correcciones del examen de gramática. El botón ES + EN abre o recoge ayudas sin borrar respuestas en curso.
-- 12 temas de conversación adaptados a tres dificultades, temporizador y grabación descargable.
+- 16 textos originales para lectura o escucha con síntesis de voz del navegador; diez con traducción completa al inglés y vocabulario, incluidos los cuatro de A2.
+- Ayudas en inglés en las 108 secciones de las 36 unidades, instrucciones, fichas y correcciones del examen de gramática. El botón ES + EN abre o recoge ayudas sin borrar respuestas en curso.
+- Seis temas sencillos de conversación A2 y doce temas para B1–C1, temporizador y grabación descargable.
 - Tareas escritas, ejemplos, borradores, rúbrica oral y 12 fichas de consulta.
-- Modelos oficiales DELE B1, B2 y C1, registro de comprensión y guía para revisar producción.
+- Modelos oficiales DELE A2, B1, B2 y C1, registro de comprensión y guía para revisar producción.
 - Progreso local y exportación/importación. Diseño responsive y navegación por teclado.
 - Paleta rosada con modo día/noche. Respeta la apariencia del dispositivo hasta elegir con el botón superior; recuerda esa elección en el navegador y conserva las respuestas al cambiar de tema.
 
@@ -56,3 +56,5 @@ Estructura y enlaces consultados el 9 de octubre de 2026. C1 utiliza el modelo d
 ## Mantener el contenido
 
 `dist/content.js` contiene las unidades; `dist/practice.js`, biblioteca, temas y referencias rápidas. `dist/bilingual.js` contiene las ayudas en inglés; `dist/extra.js`, lecturas y práctica adicionales. `dist/grammar.js` contiene el taller, sus bancos y la corrección de formas escritas. `dist/core.js` concentra corrección, criterios de consolidación y validación de copias. `dist/app.js` contiene la interfaz. `dist/theme.css` define las dos paletas y `dist/theme.js` aplica la elección antes de cargar estilos. La apariencia se guarda separada del progreso y no se incluye en sus copias. No añadas datos personales de la estudiante al código publicado.
+
+`dist/a2.js` reúne la ruta A2, sus ayudas bilingües, cuatro lecturas, seis temas orales y los nuevos bancos. Añadir A2 no cambia los identificadores ni la posición de las respuestas de los bancos antiguos. La revisión B1 acepta tanto `las` como `se las` en la pregunta de las fotos; también aclara instrucciones de perspectiva temporal.

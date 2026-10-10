@@ -1,3 +1,4 @@
+import {a2Drills} from './a2.js?v=c83be0575754';
 // Additional original practice, kept separate from the existing exam bank.
 const choice=(area,unit,prompt,answer,other,why,whyEn)=>({area,unit,prompt,options:[answer,...other],answer:0,why,whyEn});
 const form=(area,unit,prompt,accepted,why,whyEn)=>({area,unit,prompt,accepted,why,whyEn});
@@ -10,6 +11,7 @@ export const extraTopics=[
  {id:'cohesion',level:'C1',title:'Negación, concesión y precisión del argumento',unit:'c1-escritura',rule:'No siempre, nunca y no necesariamente tienen alcances diferentes. Una concesión acepta una dificultad sin cancelar la conclusión; una rectificación sustituye una explicación por otra. Es decir reformula y por tanto concluye. Antes de elegir el conector, identifica la relación lógica.',examples:['No todos estuvieron de acuerdo. / Nadie estuvo de acuerdo.','No fue por el precio, sino por el horario.','La medida ayuda; no obstante, tiene límites.'],trap:'Cambiar algunos por todos o podría por demuestra altera el argumento aunque la frase siga siendo gramatical. No conviertas una asociación en causalidad al resumir.',strategy:'Escribe la relación entre dos ideas con palabras sencillas antes de introducir un conector. Señala qué parte cae bajo la negación y conserva la certeza de la fuente.',english:{rule:'Not always, never and not necessarily have different scopes. A concession accepts an obstacle without dropping the conclusion; a correction replaces an explanation. Es decir reformulates; por tanto concludes.',trap:'Replacing some with all or could with proves changes an argument even if the sentence remains grammatical. A summary must not turn association into causation.',strategy:'Describe the relationship in plain words before choosing a connector. Mark the scope of negation and preserve the source’s certainty.'}}
 ];
 export const extraDrills={
+ A2:a2Drills,
  B1:[
  choice('agreement','b1-base','Elige la concordancia correcta.','El agua está fría.',['El agua está frío.','La agua está frío.'],'Agua es femenino; el aparece ante su /a/ inicial tónica, pero el adjetivo sigue en femenino.','Agua is feminine. El appears before its stressed initial /a/, but the adjective remains feminine.'),
  form('agreement','b1-base','Completa solo el adjetivo: Las decisiones de la directora son ___ (importante).',['importantes'],'Importantes concuerda con decisiones, no con directora. El complemento intermedio no cambia el sujeto plural.','Importantes agrees with decisiones, not directora. The intervening phrase does not change the plural subject.'),

@@ -1,4 +1,5 @@
-import {extraTopics,extraDrills} from './extra.js?v=8dec3077ee22';
+import {extraTopics,extraDrills} from './extra.js?v=c83be0575754';
+import {a2Grammar,a2Topics,a2AreaNames} from './a2.js?v=c83be0575754';
 export {extraDrills};
 // Material original de práctica: no son preguntas DELE ni una prueba de nivel validada.
 const mc=(area,unit,prompt,answer,other,why)=>({area,unit,prompt,options:[answer,...other],answer:0,why});
@@ -18,6 +19,7 @@ export const grammarTopics=[
  {id:'precision',level:'C1',title:'Precisión sintáctica y registro',unit:'c1-registro',rule:'Revisa régimen preposicional, concordancia, relativos y formas impersonales también en oraciones largas. La lengua formal admite nominalizaciones y relativos como cuyo, pero una frase larga no es automáticamente mejor. El objetivo es mantener relaciones claras entre ideas.',examples:['Me alegro de que hayas llegado. / Creo que tienes razón.','La autora, cuyos libros leí, recibió el premio.','A medida que aumentaban los costes, disminuía el margen.'],trap:'Cuyo concuerda con la cosa poseída, no con el poseedor. De que es correcto cuando el régimen lo exige; eliminar de en me acuerdo de que produce queísmo. Debe de indica normalmente conjetura; debe expresa obligación, con usos que pueden solaparse.',strategy:'Reduce una frase a su estructura principal para comprobar la concordancia. Recupera las preposiciones exigidas y revisa qué antecedente tiene cada relativo. Después ajusta la densidad al destinatario.'}
 ];
 export const grammarBank={
+ A2:a2Grammar,
  B1:[
  mc('base','b1-base','En el uso impersonal estándar: Ayer ___ muchas personas en la estación.','había',['habían','estaban'],'Haber presenta existencia y se mantiene en singular en este uso: había muchas personas. Estaban necesitaría una lectura de localización con un sujeto identificado.'),
  mc('base','b1-base','¿Dónde se celebra? El concierto ___ en el teatro municipal.','es',['está','hay'],'La localización de un acontecimiento se expresa aquí con ser. Estar localiza personas u objetos: el público está en el teatro.'),
@@ -99,7 +101,8 @@ export const grammarBank={
 };
 for(const [level,items] of Object.entries(grammarBank))items.forEach((q,i)=>{q.id=`${level.toLowerCase()}-g${i+1}`;if(q.options){const shift=i%3;q.options=q.options.slice(shift).concat(q.options.slice(0,shift));q.answer=(3-shift)%3;}});
 export const areaNames={base:'Ser, estar y concordancia',present:'Presente y perífrasis',past:'Pasados y aspecto',future:'Futuro y condicional',objects:'Pronombres',links:'Preposiciones y relativos',mood:'Modo y subordinadas',sequence:'Tiempo y discurso',conditions:'Condiciones y deseos',commands:'Instrucciones y cohesión',nuance:'Modalidad y matices',precision:'Precisión sintáctica'};
-grammarTopics.push(...extraTopics);
+grammarTopics.push(...a2Topics,...extraTopics);
+Object.assign(areaNames,a2AreaNames);
 Object.assign(areaNames,{agreement:'Artículos y concordancia',spelling:'Tildes y funciones',change:'Cambios y emociones',nonfinite:'Formas no personales',relatives:'Relativos complejos',cohesion:'Alcance y cohesión'});
 export function grammarItems(id){const [kind,level,area]=id.split('/'),bank=kind==='grammar'?grammarBank:kind==='drill'?extraDrills:null;return bank?.[level]?bank[level].filter(q=>!area||q.area===area):[];}
 export const normalizeAnswer=value=>String(value??'').normalize('NFC').trim().toLocaleLowerCase('es').replace(/\s+/g,' ').replace(/[.!?]+$/,'').trim();

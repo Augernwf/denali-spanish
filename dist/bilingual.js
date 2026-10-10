@@ -1,3 +1,4 @@
+import {a2LessonEnglish,a2Grammar} from './a2.js?v=c83be0575754';
 // English explanations are study aids, not an alternative answer key.
 export const lessonEnglish={
  'b1-base':[
@@ -131,6 +132,7 @@ export const lessonEnglish={
  'Repetition improves a task; a different topic checks transfer. Use a recording to select two useful corrections. Look at clarity, retrieval, range and response to the partner. A precise level assessment needs varied samples and trained judgement.'
  ]
 };
+Object.assign(lessonEnglish,a2LessonEnglish);
 export const topicEnglish={
  base:{rule:'Ser identifies or classifies; estar locates a person or object or presents a state; haber introduces existence. Permanent versus temporary does not cover all uses. Events use ser for location.',trap:'Existential haber stays singular: había problemas, hubo cambios, habrá oportunidades. Adjectives still agree with their nouns.',strategy:'Identify the subject if there is one. Decide whether you are identifying, locating or introducing something, then check gender and number.'},
  present:{rule:'With gustar, the liked thing is the subject: me gusta viajar, me gustan los viajes. The pronoun marks the experiencer. Verb combinations express stages such as beginning, continuing, stopping or doing something again.',trap:'Spanish uses the simple present for many habits where an English speaker may overuse the progressive. Learn each verb construction as a whole.',strategy:'Locate the real subject, pronoun and time expression. Compare a habit, an ongoing action and a duration, then write a personal example of each.'},
@@ -156,6 +158,7 @@ export const interfaceEnglish={
 };
 interfaceEnglish.text=interfaceEnglish.listening;
 export const examEnglish={
+ A2:a2Grammar.map(q=>q.whyEn),
  B1:[
  'Existential haber remains singular: había muchas personas. Estar would need a different contextual reading about the location of identified people.',
  'Use ser to locate an event: el concierto es en el teatro. Estar locates people or objects such as the audience.',

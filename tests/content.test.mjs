@@ -7,9 +7,9 @@ import {grade,consolidated,freshState,validateState,escapeHtml} from '../dist/co
 import {grammarBank,grammarTopics,grammarItems,gradeGrammar,normalizeAnswer,isCorrect,areaNames} from '../dist/grammar.js';
 import {extraDrills,extraLibrary} from '../dist/extra.js';
 import {lessonEnglish,topicEnglish,examEnglish,questionEnglish} from '../dist/bilingual.js';
-test('El curso incluye tres rutas, material completo y preguntas coherentes',()=>{
- assert.equal(lessons.length,26);assert.equal(new Set(lessons.map(l=>l.id)).size,26);
- for(const level of ['B1','B2','C1'])assert.ok(lessons.filter(l=>l.level===level).length>=8);
+test('El curso incluye cuatro rutas, material completo y preguntas coherentes',()=>{
+ assert.equal(lessons.length,36);assert.equal(new Set(lessons.map(l=>l.id)).size,36);
+ for(const level of ['A2','B1','B2','C1'])assert.ok(lessons.filter(l=>l.level===level).length>=8);
  for(const lesson of lessons){assert.ok(lesson.goal&&lesson.help&&lesson.speak&&lesson.write&&lesson.model);assert.ok(lesson.sections.length>=3);assert.ok(lesson.sections.every(s=>s.text.length>150&&s.examples.length>=2));assert.equal(lesson.quiz.length,6);assert.equal(lesson.chunks.length,4);}
  for(const item of [...lessons.flatMap(l=>l.quiz),...library.flatMap(l=>l.questions)]){assert.equal(item.options.length,3);assert.equal(new Set(item.options).size,3);assert.ok(item.answer>=0&&item.answer<3);assert.ok(item.why.length>30);}
 });
@@ -34,7 +34,7 @@ test('Las copias no confían en puntuaciones o campos arbitrarios',()=>{
 });
 test('Referencias, modelos y estructura coinciden con las fuentes consultadas',()=>{
  assert.ok(sources.every(s=>s.url.startsWith('https://')));assert.equal(exams.B1.reading,30);assert.equal(exams.B2.reading,36);assert.equal(exams.C1.reading,40);assert.equal(exams.C1.times[2],80);assert.ok(exams.C1.guide.includes('2024'));assert.equal(rubric.length,5);
- assert.equal(library.length,12);assert.ok(library.every(l=>l.questions.length>=4&&l.text.split(/\s+/).length>=150));
+ assert.equal(library.length,16);assert.ok(library.every(l=>l.questions.length>=4&&l.text.split(/\s+/).length>=(l.level==='A2'?90:150)));
 });
 test('La aplicación usa rutas y activos relativos compatibles con GitHub Pages',()=>{
  const html=fs.readFileSync(new URL('../dist/index.html',import.meta.url),'utf8');assert.match(html,/lang="es"/);assert.match(html,/src="\.\/app.js(?:\?v=[\w-]+)?"/);assert.match(html,/href="\.\/style.css(?:\?v=[\w-]+)?"/);
@@ -46,8 +46,8 @@ test('Todos los módulos publicados utilizan la misma versión de activos',()=>{
  for(const match of html.matchAll(/(?:src|href)="\.\/([\w.-]+\.(?:js|css))(?:\?v=([\w-]+))?"/g)){assert.equal(match[2],version,`index.html loads ${match[1]}`);assert.ok(fs.existsSync(new URL(match[1],root)));}
  for(const file of fs.readdirSync(root).filter(n=>n.endsWith('.js'))){const text=fs.readFileSync(new URL(file,root),'utf8');for(const match of text.matchAll(/from\s+['"]\.\/([\w.-]+\.js)(?:\?v=([\w-]+))?['"]/g)){assert.equal(match[2],version,`${file} imports ${match[1]}`);assert.ok(fs.existsSync(new URL(match[1],root)));}}
 });
-test('Tres controles originales tienen 24 preguntas, áreas y unidades de repaso válidas',()=>{
- assert.equal(grammarTopics.length,18);const all=Object.values(grammarBank).flat();assert.equal(new Set(all.map(q=>q.id)).size,72);
+test('Cuatro controles originales tienen 24 preguntas, áreas y unidades de repaso válidas',()=>{
+ assert.equal(grammarTopics.length,26);const all=Object.values(grammarBank).flat();assert.equal(new Set(all.map(q=>q.id)).size,96);
  for(const [level,items] of Object.entries(grammarBank)){
   assert.equal(items.length,24);assert.equal(items.filter(q=>q.accepted).length,6);
   const answers=items.map(q=>q.options?q.answer:q.accepted[0]);assert.equal(gradeGrammar(items,answers).percent,100);
@@ -70,7 +70,7 @@ test('El contenido adicional tiene respuestas coherentes y evidencia bilingüe',
   assert.equal(grammarItems(`drill/${level}`).length,12);for(const area of new Set(items.map(q=>q.area)))assert.equal(grammarItems(`drill/${level}/${area}`).length,6);
  }
  assert.equal(extraLibrary.length,6);for(const text of extraLibrary){assert.equal(text.questions.length,6);assert.ok(text.translation.split(/\s+/).length>100&&text.glossary.length>=4&&text.taskEn);assert.ok(text.questions.every(q=>q.whyEn));assert.equal(grade(text.questions,text.questions.map(q=>q.answer)).percent,100);}
- assert.equal(lessons.flatMap(l=>l.quiz).length+library.flatMap(l=>l.questions).length+Object.values(grammarBank).flat().length+Object.values(extraDrills).flat().length,324);
+ assert.equal(lessons.flatMap(l=>l.quiz).length+library.flatMap(l=>l.questions).length+Object.values(grammarBank).flat().length+Object.values(extraDrills).flat().length,440);
 });
 test('Las copias conservan nuevas lecturas y recalculan práctica extra sin alterar el examen antiguo',()=>{
  const state=freshState();state.drafts['lib-b2-4']='A source-faithful summary';state.results['lib-b2-4']={correct:5,total:6};state.drillResults.B2={answers:extraDrills.B2.map(q=>q.options?q.answer:q.accepted[0]),percent:0};
@@ -94,4 +94,10 @@ test('Historial de gramática recalculado y copias antiguas compatibles',()=>{
  let clean=validateState(state,lessons.map(l=>l.id));assert.equal(clean.grammarResults.B1.length,10);assert.equal(clean.grammarResults.B1[0].correct,23);assert.equal(clean.grammarResults.B1[0].areas.base.correct,3);
  state.grammarResults.B2=[{answers:[],percent:100}];clean=validateState(state,[]);assert.deepEqual(clean.grammarResults.B2,[]);
  delete state.grammarResults;assert.deepEqual(validateState(state,[]).grammarResults,{});
+});
+test('A2 conserva progreso, lecturas e historial sin romper las copias B1 anteriores',()=>{
+ const a2=freshState();a2.level='A2';a2.lastLesson='a2-identidad';a2.notes='Mi cuaderno anterior';a2.drafts['lib-a2-2']='Quiero visitar la habitación';a2.results['a2-identidad']={correct:5,total:6};a2.grammarResults.A2=[{answers:grammarBank.A2.map(q=>q.options?q.answer:q.accepted[0]),date:'2026-10-10'}];a2.drillResults.A2={answers:extraDrills.A2.map(q=>q.options?q.answer:q.accepted[0])};a2.examResults.A2={reading:99,listening:99};
+ const clean=validateState(a2,lessons.map(l=>l.id));assert.equal(clean.level,'A2');assert.equal(clean.lastLesson,a2.lastLesson);assert.equal(clean.notes,a2.notes);assert.equal(clean.drafts['lib-a2-2'],a2.drafts['lib-a2-2']);assert.equal(clean.results['a2-identidad'].percent,83);assert.equal(clean.grammarResults.A2[0].percent,100);assert.equal(clean.drillResults.A2.percent,100);assert.equal(clean.examResults.A2.reading,25);assert.equal(clean.examResults.A2.listening,25);
+ const old=freshState();old.results['b1-base']={correct:6,total:6};old.notes='Antes de añadir A2';assert.equal(validateState(old,lessons.map(l=>l.id)).results['b1-base'].percent,100);assert.equal(validateState(old,[]).notes,old.notes);
+ assert.equal(exams.A2.reading,25);assert.equal(exams.A2.listening,25);assert.deepEqual(exams.A2.times,[60,40,45,12]);assert.equal(exams.A2.prep,12);
 });
