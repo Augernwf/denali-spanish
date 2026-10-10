@@ -1,3 +1,5 @@
+import {extraTopics,extraDrills} from './extra.js';
+export {extraDrills};
 // Material original de práctica: no son preguntas DELE ni una prueba de nivel validada.
 const mc=(area,unit,prompt,answer,other,why)=>({area,unit,prompt,options:[answer,...other],answer:0,why});
 const fill=(area,unit,prompt,accepted,why)=>({area,unit,prompt,accepted,why});
@@ -97,7 +99,9 @@ export const grammarBank={
 };
 for(const [level,items] of Object.entries(grammarBank))items.forEach((q,i)=>{q.id=`${level.toLowerCase()}-g${i+1}`;if(q.options){const shift=i%3;q.options=q.options.slice(shift).concat(q.options.slice(0,shift));q.answer=(3-shift)%3;}});
 export const areaNames={base:'Ser, estar y concordancia',present:'Presente y perífrasis',past:'Pasados y aspecto',future:'Futuro y condicional',objects:'Pronombres',links:'Preposiciones y relativos',mood:'Modo y subordinadas',sequence:'Tiempo y discurso',conditions:'Condiciones y deseos',commands:'Instrucciones y cohesión',nuance:'Modalidad y matices',precision:'Precisión sintáctica'};
-export function grammarItems(id){const [kind,level,area]=id.split('/');return kind==='grammar'&&grammarBank[level]?grammarBank[level].filter(q=>!area||q.area===area):[];}
+grammarTopics.push(...extraTopics);
+Object.assign(areaNames,{agreement:'Artículos y concordancia',spelling:'Tildes y funciones',change:'Cambios y emociones',nonfinite:'Formas no personales',relatives:'Relativos complejos',cohesion:'Alcance y cohesión'});
+export function grammarItems(id){const [kind,level,area]=id.split('/'),bank=kind==='grammar'?grammarBank:kind==='drill'?extraDrills:null;return bank?.[level]?bank[level].filter(q=>!area||q.area===area):[];}
 export const normalizeAnswer=value=>String(value??'').normalize('NFC').trim().toLocaleLowerCase('es').replace(/\s+/g,' ').replace(/[.!?]+$/,'').trim();
 export function isCorrect(item,answer){return item.options?Number.isInteger(answer)&&answer===item.answer:item.accepted.some(a=>normalizeAnswer(a)===normalizeAnswer(answer));}
 export function gradeGrammar(items,answers){

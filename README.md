@@ -5,10 +5,11 @@ Una web de estudio de español para ganar soltura, con rutas abiertas B1, B2 y C
 ## Qué incluye
 
 - 26 unidades completas con explicación, ejemplos, ayuda breve en inglés y frases reutilizables.
-- 252 preguntas con explicación: 156 de unidad, 24 de comprensión y 72 de gramática.
-- Taller de gramática con 12 fichas, controles B1/B2/C1 de 24 preguntas, formas escritas, resultados por tema, enlaces de repaso y diez últimos intentos completos.
+- 324 preguntas con explicación: 156 de unidad, 60 de comprensión, 72 de examen de gramática y 36 de práctica extra.
+- Taller de gramática con 18 fichas bilingües, controles B1/B2/C1 de 24 preguntas, formas escritas, resultados por tema, enlaces de repaso y diez últimos intentos completos.
 - Avance por ≥80% en ejercicios de unidad; conversación y escritura opcionales. El indicador mide el cuestionario, no el dominio de la habilidad.
-- 6 textos originales para lectura o escucha con síntesis de voz del navegador.
+- 12 textos originales para lectura o escucha con síntesis de voz del navegador; seis nuevos con traducción completa al inglés y vocabulario.
+- Ayudas en inglés en las 78 secciones de las 26 unidades, instrucciones, fichas y correcciones del examen de gramática. El botón ES + EN abre o recoge ayudas sin borrar respuestas en curso.
 - 12 temas de conversación adaptados a tres dificultades, temporizador y grabación descargable.
 - Tareas escritas, ejemplos, borradores, rúbrica oral y 12 fichas de consulta.
 - Modelos oficiales DELE B1, B2 y C1, registro de comprensión y guía para revisar producción.
@@ -51,4 +52,4 @@ Estructura y enlaces consultados el 9 de octubre de 2026. C1 utiliza el modelo d
 
 ## Mantener el contenido
 
-`dist/content.js` contiene las unidades; `dist/practice.js`, biblioteca, temas y referencias rápidas. `dist/grammar.js` contiene el taller, sus bancos y la corrección de formas escritas. `dist/core.js` concentra corrección, criterios de consolidación y validación de copias. `dist/app.js` contiene la interfaz. No añadas datos personales de la estudiante al código publicado.
+`dist/content.js` contiene las unidades; `dist/practice.js`, biblioteca, temas y referencias rápidas. `dist/bilingual.js` contiene las ayudas en inglés; `dist/extra.js`, lecturas y práctica adicionales. `dist/grammar.js` contiene el taller, sus bancos y la corrección de formas escritas. `dist/core.js` concentra corrección, criterios de consolidación y validación de copias. `dist/app.js` contiene la interfaz. No añadas datos personales de la estudiante al código publicado.

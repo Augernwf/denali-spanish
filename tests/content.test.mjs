@@ -5,6 +5,8 @@ import {lessons,sources} from '../dist/content.js';
 import {library,exams,rubric} from '../dist/practice.js';
 import {grade,consolidated,freshState,validateState,escapeHtml} from '../dist/core.js';
 import {grammarBank,grammarTopics,grammarItems,gradeGrammar,normalizeAnswer,isCorrect,areaNames} from '../dist/grammar.js';
+import {extraDrills,extraLibrary} from '../dist/extra.js';
+import {lessonEnglish,topicEnglish,examEnglish,questionEnglish} from '../dist/bilingual.js';
 test('El curso incluye tres rutas, material completo y preguntas coherentes',()=>{
  assert.equal(lessons.length,26);assert.equal(new Set(lessons.map(l=>l.id)).size,26);
  for(const level of ['B1','B2','C1'])assert.ok(lessons.filter(l=>l.level===level).length>=8);
@@ -32,14 +34,14 @@ test('Las copias no confían en puntuaciones o campos arbitrarios',()=>{
 });
 test('Referencias, modelos y estructura coinciden con las fuentes consultadas',()=>{
  assert.ok(sources.every(s=>s.url.startsWith('https://')));assert.equal(exams.B1.reading,30);assert.equal(exams.B2.reading,36);assert.equal(exams.C1.reading,40);assert.equal(exams.C1.times[2],80);assert.ok(exams.C1.guide.includes('2024'));assert.equal(rubric.length,5);
- assert.equal(library.length,6);assert.ok(library.every(l=>l.questions.length===4&&l.text.split(/\s+/).length>=150));
+ assert.equal(library.length,12);assert.ok(library.every(l=>l.questions.length>=4&&l.text.split(/\s+/).length>=150));
 });
 test('La aplicación usa rutas y activos relativos compatibles con GitHub Pages',()=>{
  const html=fs.readFileSync(new URL('../dist/index.html',import.meta.url),'utf8');assert.match(html,/lang="es"/);assert.match(html,/src="\.\/app.js"/);assert.match(html,/href="\.\/style.css"/);
  const app=fs.readFileSync(new URL('../dist/app.js',import.meta.url),'utf8');assert.ok(!app.includes('fetch('));
 });
 test('Tres controles originales tienen 24 preguntas, áreas y unidades de repaso válidas',()=>{
- assert.equal(grammarTopics.length,12);const all=Object.values(grammarBank).flat();assert.equal(new Set(all.map(q=>q.id)).size,72);
+ assert.equal(grammarTopics.length,18);const all=Object.values(grammarBank).flat();assert.equal(new Set(all.map(q=>q.id)).size,72);
  for(const [level,items] of Object.entries(grammarBank)){
   assert.equal(items.length,24);assert.equal(items.filter(q=>q.accepted).length,6);
   const answers=items.map(q=>q.options?q.answer:q.accepted[0]);assert.equal(gradeGrammar(items,answers).percent,100);
@@ -49,6 +51,26 @@ test('Tres controles originales tienen 24 preguntas, áreas y unidades de repaso
  }
  assert.deepEqual(grammarItems('grammar/unknown'),[]);
  for(const t of grammarTopics)assert.ok(t.rule&&t.trap&&t.strategy&&t.examples.length>=3&&lessons.some(l=>l.id===t.unit));
+});
+test('Ayudas en inglés cubren todas las unidades, fichas y correcciones de gramática',()=>{
+ for(const lesson of lessons){const sections=lessonEnglish[lesson.id];assert.equal(sections.length,lesson.sections.length);assert.ok(sections.every(s=>s.length>100));}
+ for(const topic of grammarTopics){const en=topic.english??topicEnglish[topic.id];assert.ok(en.rule.length>70&&en.trap&&en.strategy);}
+ for(const [level,items] of Object.entries(grammarBank)){assert.equal(examEnglish[level].length,items.length);assert.ok(items.every(q=>questionEnglish(q)?.length>30));}
+});
+test('El contenido adicional tiene respuestas coherentes y evidencia bilingüe',()=>{
+ const ids=new Set();for(const [level,items] of Object.entries(extraDrills)){
+  assert.equal(items.length,12);assert.equal(gradeGrammar(items,items.map(q=>q.options?q.answer:q.accepted[0])).percent,100);
+  for(const q of items){assert.ok(!ids.has(q.id));ids.add(q.id);assert.ok(q.why&&q.whyEn&&areaNames[q.area]);assert.ok(lessons.some(l=>l.id===q.unit));}
+  assert.equal(grammarItems(`drill/${level}`).length,12);for(const area of new Set(items.map(q=>q.area)))assert.equal(grammarItems(`drill/${level}/${area}`).length,6);
+ }
+ assert.equal(extraLibrary.length,6);for(const text of extraLibrary){assert.equal(text.questions.length,6);assert.ok(text.translation.split(/\s+/).length>100&&text.glossary.length>=4&&text.taskEn);assert.ok(text.questions.every(q=>q.whyEn));assert.equal(grade(text.questions,text.questions.map(q=>q.answer)).percent,100);}
+ assert.equal(lessons.flatMap(l=>l.quiz).length+library.flatMap(l=>l.questions).length+Object.values(grammarBank).flat().length+Object.values(extraDrills).flat().length,324);
+});
+test('Las copias conservan nuevas lecturas y recalculan práctica extra sin alterar el examen antiguo',()=>{
+ const state=freshState();state.drafts['lib-b2-4']='A source-faithful summary';state.results['lib-b2-4']={correct:5,total:6};state.drillResults.B2={answers:extraDrills.B2.map(q=>q.options?q.answer:q.accepted[0]),percent:0};
+ const clean=validateState(state,lessons.map(l=>l.id));assert.equal(clean.drafts['lib-b2-4'],state.drafts['lib-b2-4']);assert.equal(clean.results['lib-b2-4'].percent,83);assert.equal(clean.drillResults.B2.percent,100);
+ assert.equal(grammarBank.B1[0].id,'b1-g1');assert.equal(grammarBank.B1.length,24);
+ const old=freshState();delete old.drillResults;assert.deepEqual(validateState(old,[]).drillResults,{});
 });
 test('El corrector escrito respeta tildes y ñ y admite variantes explícitas',()=>{
  assert.equal(normalizeAnswer('  HABÍA. '),'había');assert.notEqual(normalizeAnswer('ano'),normalizeAnswer('año'));

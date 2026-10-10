@@ -1,6 +1,6 @@
-import {grammarBank,gradeGrammar} from './grammar.js';
+import {grammarBank,extraDrills,gradeGrammar} from './grammar.js';
 export const STORAGE_KEY='denali-spanish-v1';
-export const freshState=()=>({version:1,level:'B1',english:false,results:{},ratings:{},drafts:{},reviewed:{},notes:'',examResults:{},grammarResults:{},lastLesson:null});
+export const freshState=()=>({version:1,level:'B1',english:false,results:{},ratings:{},drafts:{},reviewed:{},notes:'',examResults:{},grammarResults:{},drillResults:{},lastLesson:null});
 export const escapeHtml=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function grade(items,answers){
   if(items.length!==answers.length||answers.some((a,i)=>!Number.isInteger(a)||a<0||a>=items[i].options.length)) throw new Error('Responde a todas las preguntas.');
@@ -15,7 +15,7 @@ export function validateState(data,ids){
   clean.notes=typeof data.notes==='string'?data.notes.slice(0,100000):'';
   for(const key of ['drafts','reviewed','ratings','results']){
     for(const [id,value] of Object.entries(data[key]??{})){
-      if(!ids.includes(id)&&!/^lib-(b1|b2|c1)-[12]$/.test(id)&&id!=='conversation')continue;
+      if(!ids.includes(id)&&!/^lib-(b1|b2|c1)-[1-4]$/.test(id)&&id!=='conversation')continue;
       if(key==='drafts'&&typeof value==='string')clean[key][id]=value.slice(0,100000);
       if(key==='reviewed'&&typeof value==='boolean')clean[key][id]=value;
       if(key==='ratings'&&Array.isArray(value)&&value.length===5&&value.every(n=>Number.isInteger(n)&&n>=1&&n<=5))clean[key][id]=value;
@@ -34,6 +34,8 @@ export function validateState(data,ids){
         return [{...result,date:typeof attempt.date==='string'?attempt.date.slice(0,40):''}];
       }catch{return [];}
     });
+    const drill=data.drillResults?.[level];
+    try{if(drill?.answers?.every(a=>typeof a!=='string'||a.length<=100))clean.drillResults[level]=gradeGrammar(extraDrills[level],drill.answers);}catch{}
   }
   return clean;
 }
