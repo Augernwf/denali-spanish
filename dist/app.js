@@ -1,8 +1,8 @@
-import {lessons,sources} from './content.js?v=2b4b276e0e40';
-import {library,topics,exams,references,rubric} from './practice.js?v=2b4b276e0e40';
-import {STORAGE_KEY,freshState,escapeHtml as e,grade,consolidated,validateState} from './core.js?v=2b4b276e0e40';
-import {grammarBank,grammarTopics,grammarItems,areaNames,gradeGrammar,isCorrect,extraDrills} from './grammar.js?v=2b4b276e0e40';
-import {lessonEnglish,topicEnglish,interfaceEnglish,questionEnglish} from './bilingual.js?v=2b4b276e0e40';
+import {lessons,sources} from './content.js?v=2fd2ef36e4a0';
+import {library,topics,exams,references,rubric} from './practice.js?v=2fd2ef36e4a0';
+import {STORAGE_KEY,freshState,escapeHtml as e,grade,consolidated,validateState} from './core.js?v=2fd2ef36e4a0';
+import {grammarBank,grammarTopics,grammarItems,areaNames,gradeGrammar,isCorrect,extraDrills} from './grammar.js?v=2fd2ef36e4a0';
+import {lessonEnglish,topicEnglish,interfaceEnglish,questionEnglish} from './bilingual.js?v=2fd2ef36e4a0';
 const $=(selector)=>document.querySelector(selector);
 let state=freshState(),timer=null,recorder=null,stream=null,audioUrl=null,currentTab='learn',storageWarning=false;
 try {const saved=localStorage.getItem(STORAGE_KEY);if(saved)state=validateState(JSON.parse(saved),lessons.map(l=>l.id));}catch{storageWarning=true;}
@@ -22,7 +22,24 @@ function nextLesson(){return progress(state.level).list.find(l=>!consolidated(st
 function lessonCard(l,index){const mastered=consolidated(state,l.id),score=state.results[l.id];return `<a class="lesson-card" href="#lesson/${l.id}"><span class="lesson-number">${String(index+1).padStart(2,'0')}</span><div>${badge(l.level)}<span class="tiny">${e(l.tag)}</span><h3>${e(l.title)}</h3><p>${e(l.goal)}</p></div><span class="lesson-meta">${mastered?'✓ Ejercicios superados':score?`${score.percent}% · seguir practicando`:`${l.minutes} min`} <span aria-hidden="true">↗</span></span></a>`;}
 function home(){
  const {done,list}=progress(state.level),next=nextLesson(),total=lessons.filter(l=>consolidated(state,l.id)).length;
- return `<section class="hero"><div>${eyebrow('TU ESPACIO PARA GANAR SOLTURA')}<h1>Más palabras.<br>Más <em>confianza.</em></h1><p>Del «sé lo que quiero decir» al «puedo explicarlo».<br>Un camino de español para hacerlo tuyo.</p><a class="button light" href="#lesson/${next.id}">${state.results[next.id]?'Continuar estudiando':'Empezar mi sesión'} <span>↗</span></a><span class="hero-note">${state.level} · ${e(next.title)}</span></div><div class="hero-art" aria-hidden="true"><svg viewBox="0 0 330 310"><path d="M30 282 Q165 33 300 282" fill="#b9c69b"/><path d="M72 282 Q170 91 280 282" fill="#d6dfbd"/><path d="M109 282 Q205 174 280 282" fill="#edf0d7"/><circle cx="237" cy="54" r="31" fill="#f2c691"/><path d="M156 280 Q136 194 172 94 M156 231 Q104 224 89 181 Q146 176 156 231 M159 194 Q214 195 238 147 Q182 140 159 194 M164 145 Q126 123 132 83 Q173 94 164 145" fill="none" stroke="#43684e" stroke-width="5"/><path d="M34 282H302" stroke="#678461" stroke-width="2"/></svg><span>Un paso cada día.</span></div></section>
+ return `<section class="hero"><div>${eyebrow('TU ESPACIO PARA GANAR SOLTURA')}<h1>Más palabras.<br>Más <em>confianza.</em></h1><p>Del «sé lo que quiero decir» al «puedo explicarlo».<br>Un camino de español para hacerlo tuyo.</p><a class="button light" href="#lesson/${next.id}">${state.results[next.id]?'Continuar estudiando':'Empezar mi sesión'} <span>↗</span></a><span class="hero-note">${state.level} · ${e(next.title)}</span></div><div class="hero-art" aria-hidden="true"><svg class="daily-flower" viewBox="0 0 330 310" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <linearGradient id="denali-petal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffe0ed"/><stop offset=".5" stop-color="#f2aacb"/><stop offset="1" stop-color="#d976a6"/></linearGradient>
+  <linearGradient id="denali-inner-petal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff1e8"/><stop offset="1" stop-color="#f5bbce"/></linearGradient>
+ </defs>
+ <circle class="flower-halo" cx="172" cy="115" r="105"/>
+ <path class="flower-stem" d="M172 142 C163 185 180 231 153 283"/>
+ <path class="flower-leaf" d="M169 227 C125 229 103 207 99 180 C134 179 162 196 169 227Z"/>
+ <path class="flower-vein" d="M108 189 Q143 204 169 227"/>
+ <path class="flower-leaf" d="M169 249 C169 213 197 188 228 188 C228 221 205 244 169 249Z"/>
+ <path class="flower-vein" d="M169 249 Q197 218 218 198"/>
+ <g fill="url(#denali-petal)"><ellipse class="flower-petal" cx="172" cy="76" rx="30" ry="45" transform="rotate(0 172 115)"/><ellipse class="flower-petal" cx="172" cy="76" rx="30" ry="45" transform="rotate(45 172 115)"/><ellipse class="flower-petal" cx="172" cy="76" rx="30" ry="45" transform="rotate(90 172 115)"/><ellipse class="flower-petal" cx="172" cy="76" rx="30" ry="45" transform="rotate(135 172 115)"/><ellipse class="flower-petal" cx="172" cy="76" rx="30" ry="45" transform="rotate(180 172 115)"/><ellipse class="flower-petal" cx="172" cy="76" rx="30" ry="45" transform="rotate(225 172 115)"/><ellipse class="flower-petal" cx="172" cy="76" rx="30" ry="45" transform="rotate(270 172 115)"/><ellipse class="flower-petal" cx="172" cy="76" rx="30" ry="45" transform="rotate(315 172 115)"/></g>
+ <g fill="url(#denali-inner-petal)"><ellipse class="flower-petal" cx="172" cy="94" rx="19" ry="29" transform="rotate(22 172 115)"/><ellipse class="flower-petal" cx="172" cy="94" rx="19" ry="29" transform="rotate(82 172 115)"/><ellipse class="flower-petal" cx="172" cy="94" rx="19" ry="29" transform="rotate(142 172 115)"/><ellipse class="flower-petal" cx="172" cy="94" rx="19" ry="29" transform="rotate(202 172 115)"/><ellipse class="flower-petal" cx="172" cy="94" rx="19" ry="29" transform="rotate(262 172 115)"/><ellipse class="flower-petal" cx="172" cy="94" rx="19" ry="29" transform="rotate(322 172 115)"/></g>
+ <circle cx="172" cy="115" r="19" fill="#e48bae"/>
+ <circle cx="172" cy="115" r="14" fill="#f8d49e"/>
+ <g fill="#a96563"><circle cx="181.00" cy="115.00" r="1.5"/><circle cx="178.36" cy="121.36" r="1.5"/><circle cx="172.00" cy="124.00" r="1.5"/><circle cx="165.64" cy="121.36" r="1.5"/><circle cx="163.00" cy="115.00" r="1.5"/><circle cx="165.64" cy="108.64" r="1.5"/><circle cx="172.00" cy="106.00" r="1.5"/><circle cx="178.36" cy="108.64" r="1.5"/><circle cx="172" cy="115" r="2"/></g>
+ <path d="M137 287 Q162 283 181 287" fill="none" stroke="#e7a6c5" stroke-width="2" stroke-linecap="round" opacity=".6"/>
+</svg><span>Un paso cada día.</span></div></section>
  <section class="stats" aria-label="Tu progreso"><div><span>${done}<small> / ${list.length}</small></span><p>unidades con ejercicios superados en ${state.level}</p></div><div><span>${lessons.length}</span><p>unidades de B1 a C1</p></div><div><span>${lessons.reduce((n,l)=>n+l.quiz.length,0)+library.reduce((n,l)=>n+l.questions.length,0)+Object.values(grammarBank).flat().length+Object.values(extraDrills).flat().length}</span><p>preguntas con explicación</p></div><div><span>${total}</span><p>unidades con ejercicios superados en total</p></div></section>
  <section class="section-heading"><div>${eyebrow('UN CAMINO QUE SE ADAPTA A TI')}<h2>Tu ritmo. Tu siguiente paso.</h2></div><a href="#route">Ver toda la ruta ↗</a></section>
  <div class="level-grid">${Object.entries(levelSummary).map(([level,[title,desc]])=>{const p=progress(level);return `<button class="level-card ${state.level===level?'selected':''}" data-level="${level}">${badge(level)}<span class="level-status">${state.level===level?'TU RUTA ACTUAL':'RUTA ABIERTA'}</span><h3>${title}</h3><p>${desc}</p><div class="progress-track"><span style="width:${p.done/p.list.length*100}%"></span></div><small>${p.done} de ${p.list.length} unidades con ejercicios superados</small></button>`;}).join('')}</div>
