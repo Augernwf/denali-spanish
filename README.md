@@ -14,6 +14,7 @@ Una web de estudio de español para ganar soltura, con rutas abiertas B1, B2 y C
 - Tareas escritas, ejemplos, borradores, rúbrica oral y 12 fichas de consulta.
 - Modelos oficiales DELE B1, B2 y C1, registro de comprensión y guía para revisar producción.
 - Progreso local y exportación/importación. Diseño responsive y navegación por teclado.
+- Paleta rosada con modo día/noche. Respeta la apariencia del dispositivo hasta elegir con el botón superior; recuerda esa elección en el navegador y conserva las respuestas al cambiar de tema.
 
 El contenido es original y orientativo. Los cuestionarios no están validados como pruebas de nivel. Los modelos oficiales se enlazan desde el Instituto Cervantes, sin redistribuir sus contenidos. Las tareas orales y escritas necesitan revisión humana; ninguna puntuación local certifica un nivel.
 
@@ -54,4 +55,4 @@ Estructura y enlaces consultados el 9 de octubre de 2026. C1 utiliza el modelo d
 
 ## Mantener el contenido
 
-`dist/content.js` contiene las unidades; `dist/practice.js`, biblioteca, temas y referencias rápidas. `dist/bilingual.js` contiene las ayudas en inglés; `dist/extra.js`, lecturas y práctica adicionales. `dist/grammar.js` contiene el taller, sus bancos y la corrección de formas escritas. `dist/core.js` concentra corrección, criterios de consolidación y validación de copias. `dist/app.js` contiene la interfaz. No añadas datos personales de la estudiante al código publicado.
+`dist/content.js` contiene las unidades; `dist/practice.js`, biblioteca, temas y referencias rápidas. `dist/bilingual.js` contiene las ayudas en inglés; `dist/extra.js`, lecturas y práctica adicionales. `dist/grammar.js` contiene el taller, sus bancos y la corrección de formas escritas. `dist/core.js` concentra corrección, criterios de consolidación y validación de copias. `dist/app.js` contiene la interfaz. `dist/theme.css` define las dos paletas y `dist/theme.js` aplica la elección antes de cargar estilos. La apariencia se guarda separada del progreso y no se incluye en sus copias. No añadas datos personales de la estudiante al código publicado.
