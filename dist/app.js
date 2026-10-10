@@ -1,8 +1,8 @@
-import {lessons,sources} from './content.js?v=2fd2ef36e4a0';
-import {library,topics,exams,references,rubric} from './practice.js?v=2fd2ef36e4a0';
-import {STORAGE_KEY,freshState,escapeHtml as e,grade,consolidated,validateState} from './core.js?v=2fd2ef36e4a0';
-import {grammarBank,grammarTopics,grammarItems,areaNames,gradeGrammar,isCorrect,extraDrills} from './grammar.js?v=2fd2ef36e4a0';
-import {lessonEnglish,topicEnglish,interfaceEnglish,questionEnglish} from './bilingual.js?v=2fd2ef36e4a0';
+import {lessons,sources} from './content.js?v=8dec3077ee22';
+import {library,topics,exams,references,rubric} from './practice.js?v=8dec3077ee22';
+import {STORAGE_KEY,freshState,escapeHtml as e,grade,consolidated,validateState} from './core.js?v=8dec3077ee22';
+import {grammarBank,grammarTopics,grammarItems,areaNames,gradeGrammar,isCorrect,extraDrills} from './grammar.js?v=8dec3077ee22';
+import {lessonEnglish,topicEnglish,interfaceEnglish,questionEnglish} from './bilingual.js?v=8dec3077ee22';
 const $=(selector)=>document.querySelector(selector);
 let state=freshState(),timer=null,recorder=null,stream=null,audioUrl=null,currentTab='learn',storageWarning=false;
 try {const saved=localStorage.getItem(STORAGE_KEY);if(saved)state=validateState(JSON.parse(saved),lessons.map(l=>l.id));}catch{storageWarning=true;}

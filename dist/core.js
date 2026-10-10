@@ -1,4 +1,4 @@
-import {grammarBank,extraDrills,gradeGrammar} from './grammar.js?v=2fd2ef36e4a0';
+import {grammarBank,extraDrills,gradeGrammar} from './grammar.js?v=8dec3077ee22';
 export const STORAGE_KEY='denali-spanish-v1';
 export const freshState=()=>({version:1,level:'B1',english:false,results:{},ratings:{},drafts:{},reviewed:{},notes:'',examResults:{},grammarResults:{},drillResults:{},lastLesson:null});
 export const escapeHtml=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));

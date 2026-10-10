@@ -79,6 +79,7 @@ test('Las copias conservan nuevas lecturas y recalculan práctica extra sin alte
  const old=freshState();delete old.drillResults;assert.deepEqual(validateState(old,[]).drillResults,{});
 });
 test('El corrector escrito respeta tildes y ñ y admite variantes explícitas',()=>{
+ const photos=grammarBank.B1.find(q=>q.id==='b1-g18');assert.equal(isCorrect(photos,'las'),true);assert.equal(isCorrect(photos,'se las'),true);assert.equal(isCorrect(photos,'le las'),false);assert.ok(questionEnglish(photos).includes('Both las and se las'));
  assert.equal(normalizeAnswer('  HABÍA. '),'había');assert.notEqual(normalizeAnswer('ano'),normalizeAnswer('año'));
  assert.equal(normalizeAnswer('habi\u0301a'),normalizeAnswer('había'));
  const q=grammarBank.B2.find(q=>q.accepted?.includes('llamase'));assert.equal(isCorrect(q,'LLAMASE.'),true);assert.equal(isCorrect(q,'llamara'),true);
