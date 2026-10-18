@@ -1,6 +1,6 @@
-import {question as q} from './content.js?v=ff50ceb8ba34';
-import {extraLibrary} from './extra.js?v=ff50ceb8ba34';
-import {a2Library} from './a2.js?v=ff50ceb8ba34';
+import {question as q} from './content.js?v=d9b04d29540c';
+import {extraLibrary} from './extra.js?v=d9b04d29540c';
+import {a2Library} from './a2.js?v=d9b04d29540c';
 export const library=[
 {id:'lib-b1-1',level:'B1',title:'Un cambio de planes',type:'Relato',text:'El sábado habíamos quedado para hacer una excursión. Yo quería salir temprano porque la última vez había mucho tráfico. Cuando me levanté, todavía hacía buen tiempo, así que preparé una mochila y fui a la estación. Allí recibí un mensaje de Marta: su coche no arrancaba y no podía recogernos. Al principio pensamos en cancelar el viaje. Después miramos los autobuses y encontramos uno que salía a las diez. El problema era que nos dejaba lejos del comienzo del camino. Mientras decidíamos qué hacer, apareció Luis. Conocía otro sendero que empezaba cerca de una parada. Aceptamos su propuesta y compramos las entradas. Durante el trayecto empezó a llover, pero la lluvia duró poco. Cuando llegamos, el suelo estaba mojado y caminamos más despacio de lo previsto. No hicimos toda la ruta; paramos junto a un río y comimos allí. Volvimos a casa cansados, pero contentos. Ahora, antes de organizar una excursión, intento tener una alternativa. La próxima vez consultaré los horarios del autobús desde el principio y llevaré una chaqueta mejor. No creo que un pequeño cambio tenga que estropear todo el día.',questions:[q('¿Por qué quería salir temprano?','Para evitar el tráfico.',['Porque no había autobuses.','Porque Marta trabajaba.'],'Lo explica al principio: en el viaje anterior hubo tráfico.'),q('¿Qué problema tuvo Marta?','Su coche no arrancaba.',['Perdió la mochila.','No conocía el camino.'],'El mensaje señala un problema del coche.'),q('¿Qué aportó Luis?','Una ruta que empezaba cerca de una parada.',['Un coche nuevo.','Entradas ya compradas.'],'La alternativa resolvía la distancia desde el autobús.'),q('¿Qué hicieron finalmente?','Caminaron solo parte de la ruta.',['Cancelaron todo el viaje.','Completaron toda la ruta.'],'El relato dice que no hicieron toda la ruta.')],task:'Cuenta una experiencia parecida y explica qué harías de otra manera.'},
 {id:'lib-b1-2',level:'B1',title:'El taller del barrio',type:'Aviso',text:'El centro del barrio organizará un taller de cocina el próximo sábado. La actividad empezará a las once y terminará sobre las dos. Pueden participar personas adultas con o sin experiencia. Hay veinte plazas y es necesario inscribirse antes del jueves por la tarde. La inscripción cuesta doce euros e incluye los ingredientes y el uso de los utensilios. Cada participante debe llevar un delantal y un recipiente para llevarse lo que prepare. El centro recomienda llegar quince minutos antes para organizar los grupos, aunque la puerta seguirá abierta hasta las once. Durante la primera parte, la profesora explicará cómo preparar una receta sencilla. Después, las personas participantes trabajarán en parejas. Al final se compartirán los platos y se comentará qué ha resultado más difícil. Quienes tengan alguna alergia deben comunicarlo al inscribirse, para que el equipo pueda valorar las adaptaciones. El aviso no confirma que se pueda adaptar cualquier receta. Si alguien no puede asistir, puede cancelar su plaza hasta el viernes a mediodía y recibir el importe de la inscripción. Después de esa hora no se devuelve el dinero, pero otra persona puede ocupar su lugar si se comunica el cambio al centro. Para cualquier duda, la organización pide consultar antes de reservar.',questions:[q('¿Cuándo termina el plazo de inscripción?','El jueves por la tarde.',['El sábado a las once.','El viernes a mediodía.'],'No confundas el plazo de inscripción con el de cancelación.'),q('¿Qué tiene que llevar cada participante?','Un delantal y un recipiente.',['Todos los ingredientes.','Todos los utensilios.'],'Ingredientes y utensilios están incluidos.'),q('Llegar quince minutos antes es…','Una recomendación.',['Una obligación explícita.','Una prohibición.'],'El texto recomienda y aclara que la puerta seguirá abierta.'),q('¿Se garantiza adaptar cualquier receta?','No; el equipo debe valorar las adaptaciones.',['Sí, sin excepción.','No se admiten consultas.'],'El aviso no garantiza todas las adaptaciones.')],task:'Explica el aviso a una amiga. Separa obligaciones, recomendaciones y dudas pendientes.'},
@@ -50,3 +50,46 @@ export const references=[
 
 export const rubric=[['Claridad','Se entiende qué quieres decir sin reconstruir constantemente el mensaje.'],['Fluidez','Mantienes el hilo y puedes superar búsquedas de palabras con pausas razonables.'],['Recursos','Tienes vocabulario y estructuras para explicar, precisar y reformular.'],['Corrección','Los errores no ocultan relaciones importantes; puedes corregir algunos por ti misma.'],['Interacción','Respondes, desarrollas, preguntas y adaptas tus ideas al interlocutor.']];
 library.push(...extraLibrary,...a2Library);
+
+const originalReadingEnglish={
+ 'lib-b1-1':[
+  'She wanted to leave early because the previous trip had involved heavy traffic.',
+  'Marta’s message says that her car would not start, so she could not pick them up.',
+  'Luis knew another trail that began near a bus stop.',
+  'They stopped by a river and did not complete the whole route.'
+ ],
+ 'lib-b1-2':[
+  'Registration closes on Thursday afternoon. The Friday deadline is for cancelling a place.',
+  'Each participant must bring an apron and a container. The ingredients and utensils are included.',
+  'Arriving early is a recommendation; the door stays open until eleven.',
+  'The notice does not promise that every recipe can be adapted. The team will assess each request.'
+ ],
+ 'lib-b2-1':[
+  'At first Clara hoped that working from home would solve her scheduling problems, including the long commute.',
+  'She kept answering messages at night, which made it difficult to end the workday.',
+  'Clara has a spare room at home, an advantage that many of her colleagues do not have.',
+  'She proposes trying a shared calendar for a month and reviewing the problems afterward.'
+ ],
+ 'lib-b2-2':[
+  'The month-long closure was a trial to see whether neighbours could use the space for activities.',
+  'The traders’ opinions differed, and the text says there was not enough data for a rigorous comparison of sales.',
+  'The association proposes another trial with practical adjustments and clearer evaluation criteria.',
+  'The shared goal is a more pleasant square; the disagreement concerns how to reach it without harming important needs.'
+ ],
+ 'lib-c1-1':[
+  'The text argues that convenience, such as saving a trip, does not guarantee access for everyone.',
+  'More information does not necessarily make a task clearer; a long text can hide the action a person needs to take.',
+  'An in-person option can still be hard to use if it is far away or available only at limited times.',
+  'The conclusion calls for evaluating digital services through users’ experiences, without rejecting every digital change.'
+ ],
+ 'lib-c1-2':[
+  'The statements show that the people who shared their experience felt more confident; they do not measure everyone’s speaking ability.',
+  'Missing evidence does not show that the programme failed. It limits what can be claimed about its effect on competence.',
+  'The text proposes comparing oral samples from different times, using comparable tasks, clear criteria and new opportunities for interaction.',
+  'Confidence is valuable in its own right, but it is different from a measured change in overall speaking competence.'
+ ]
+};
+for(const [id,feedback] of Object.entries(originalReadingEnglish)){
+ const text=library.find(item=>item.id===id);
+ text?.questions.forEach((item,index)=>{item.whyEn=feedback[index];});
+}

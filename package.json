@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "scripts": {"start": "node tools/serve.mjs", "test": "node --test tests/*.test.mjs"},
-  "description": "Español de B1 a C1 con práctica activa y controles DELE"
+  "scripts": {
+    "start": "node tools/serve.mjs",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "description": "Estudio de español A2–C1 con gramática bilingüe, repaso activo y práctica de comprensión"
 }
