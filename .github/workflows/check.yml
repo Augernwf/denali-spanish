@@ -1,0 +1,23 @@
+name: Revisar propuesta
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node tools/version-assets.mjs
+      - run: npm test
+      - name: Comprobar sintaxis
+        run: for file in dist/*.js; do node --check "$file"; done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: denali-preview
+          path: dist
+          retention-days: 14

@@ -16,6 +16,13 @@ Una web de estudio de español para ganar soltura, con rutas abiertas A2, B1, B2
 - Progreso local y exportación/importación. Diseño responsive y navegación por teclado.
 - Paleta rosada con modo día/noche. Respeta la apariencia del dispositivo hasta elegir con el botón superior; recuerda esa elección en el navegador y conserva las respuestas al cambiar de tema.
 - Gramática visual: seis esquemas interactivos sobre pronombres, gustar, punto de vista temporal, ser/estar/hay, concordancia y muy/mucho. Cada cambio incluye etiquetas y explicación bilingüe; no altera notas ni resultados.
+- Sesión sugerida de 10, 15 o 25 minutos: recordar, entender un contraste y aplicarlo a una lectura. Retoma una unidad pendiente de la ruta elegida.
+- Buscador transversal en español e inglés, con filtros por nivel y actividad; incluye fichas con una vista propia y esquemas visuales.
+- Repaso de preguntas falladas en tandas de hasta ocho, con intervalos orientativos de 1, 3, 7 y 14 días. Alterna los errores para que una tanda no bloquee las siguientes.
+- Respuestas de unidades y controles guardadas mientras se escriben. Las tandas dinámicas de repaso se reinician al salir para no mezclar preguntas distintas.
+- B1 sigue como ruta inicial. El acceso de apoyo a A2 permite explorar sus unidades sin cambiar la ruta principal.
+- Importación con vista previa y copia anterior recuperable. Los fallos de almacenamiento se muestran de forma persistente y las copias se validan antes de sustituir datos.
+- En esta revisión se aclararon 18 enunciados y se añadieron 84 explicaciones inglesas de respuestas: 54 de unidades B1, 6 de argumentación B2 y 24 de comprensión B1–C1.
 
 El contenido es original y orientativo. Los cuestionarios no están validados como pruebas de nivel. Los modelos oficiales se enlazan desde el Instituto Cervantes, sin redistribuir sus contenidos. Las tareas orales y escritas necesitan revisión humana; ninguna puntuación local certifica un nivel.
 
@@ -43,7 +50,7 @@ La URL será `https://<usuario>.github.io/denali-spanish/` si el repositorio tie
 
 ## Datos personales
 
-Los borradores, notas y resultados se guardan en `localStorage` del navegador. No se suben al repositorio ni se sincronizan. Exportar genera un JSON con esos textos. Importar sustituye la copia local. Las grabaciones se mantienen en memoria hasta descargarlas; salir de la sección elimina la copia temporal. La síntesis de voz puede utilizar servicios del navegador según la voz disponible. Las fuentes web se solicitan a Google Fonts; si no cargan se usan tipografías del sistema.
+Los borradores, respuestas, repasos, notas y resultados se guardan en `localStorage` del navegador. No se suben al repositorio ni se sincronizan. Exportar genera un JSON con esos textos. Importar sustituye la copia local después de mostrar su resumen; conserva una copia anterior recuperable desde el cuaderno. Si se detecta una copia que no se puede leer, se conserva antes de escribir progreso nuevo y se puede exportar para revisarla. Las grabaciones se mantienen en memoria hasta descargarlas; salir de la sección elimina la copia temporal. La síntesis de voz puede utilizar servicios del navegador según la voz disponible. La interfaz utiliza fuentes del sistema y no solicita Google Fonts.
 
 ## Referencias
 
@@ -61,3 +68,11 @@ Estructura y enlaces consultados el 9 de octubre de 2026. C1 utiliza el modelo d
 `dist/a2.js` reúne la ruta A2, sus ayudas bilingües, cuatro lecturas, seis temas orales y los nuevos bancos. Añadir A2 no cambia los identificadores ni la posición de las respuestas de los bancos antiguos. La revisión B1 acepta tanto `las` como `se las` en la pregunta de las fotos; también aclara instrucciones de perspectiva temporal.
 
 `dist/visuals.js` contiene los ejemplos y las interacciones de gramática visual; `dist/visuals.css`, sus diagramas y estilos. Mantén etiquetas textuales: los colores son un apoyo y nunca la única explicación.
+
+`dist/study.js` contiene el catálogo, la planificación y el repaso; `dist/study-view.js`, sus vistas; `dist/study.css`, la capa de legibilidad y accesibilidad. `dist/storage.js` gestiona importaciones con recuperación ante fallos de escritura. Las claves de preguntas son estables: no cambies IDs ni posiciones de opciones para introducir variantes.
+
+## Rama de mejora y revisión
+
+`codex/denali-study-upgrade` conserva `main` como versión pública. El plan y los informes están en `docs/UPGRADE-PLAN.md`, `docs/LEARNING-REVIEW.md`, `docs/DESIGN-REVIEW.md`, `docs/QUALITY-REVIEW.md` y `docs/FINAL-LEARNING-UX-REVIEW.md`.
+
+El workflow `check.yml` comprueba las propuestas dirigidas a `main` y adjunta `denali-preview` con los archivos estáticos. No publica esas propuestas. El despliegue de Pages sigue dependiendo de `main`.
