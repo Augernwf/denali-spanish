@@ -2,10 +2,11 @@
 <html lang="es">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Un espacio para ganar soltura en español. Lecciones A2, B1, B2 y C1, práctica oral, escucha y modelos oficiales DELE.">
+  <meta name="description" content="Un espacio para ganar soltura en español. Rutas A2, B1, B2 y C1, gramática bilingüe, repaso de errores, lectura, escucha y modelos oficiales DELE.">
   <meta name="theme-color" content="#fff8fa"><title>Denali Spanish · Hablar con soltura</title>
-  <script src="./theme.js?v=ff50ceb8ba34"></script>
-  <link rel="icon" href="./icon.svg" type="image/svg+xml"><link rel="stylesheet" href="./style.css?v=ff50ceb8ba34"><link rel="stylesheet" href="./theme.css?v=ff50ceb8ba34"><link rel="stylesheet" href="./visuals.css?v=ff50ceb8ba34">
+  <script src="./theme.js?v=d9b04d29540c"></script>
+  <link rel="icon" href="./icon.svg" type="image/svg+xml"><link rel="stylesheet" href="./style.css?v=d9b04d29540c"><link rel="stylesheet" href="./theme.css?v=d9b04d29540c"><link rel="stylesheet" href="./visuals.css?v=d9b04d29540c">
+  <link rel="stylesheet" href="./study.css?v=d9b04d29540c">
 </head>
 <body>
   <a href="#main" class="skip">Saltar al contenido</a>
@@ -14,6 +15,8 @@
     <p class="nav-label">TU ESPACIO DE ESPAÑOL</p>
     <nav id="navigation">
       <a href="#home" data-nav="home"><span aria-hidden="true">⌂</span> Mi estudio</a>
+      <a href="#review" data-nav="review"><span aria-hidden="true">↻</span> Mi repaso</a>
+      <a href="#search" data-nav="search"><span aria-hidden="true">⌕</span> Buscar contenido</a>
       <a href="#route" data-nav="route"><span aria-hidden="true">▤</span> Ruta de aprendizaje</a>
       <a href="#grammar" data-nav="grammar"><span aria-hidden="true">Aa</span> Gramática y examen</a>
       <a href="#visual" data-nav="visual"><span aria-hidden="true">◇</span> Gramática visual</a>
@@ -26,11 +29,12 @@
     <div class="sidebar-bottom"><span class="small-badge">A TU RITMO</span><p>Un poco de español.<br>Un poco más de confianza.</p><a href="#method">Cómo usar este espacio ↗</a></div>
   </aside>
   <div class="workspace">
-    <header class="topbar"><span class="topbar-text">Aprender para vivir en español</span><div class="topbar-controls"><label for="level">Mi ruta</label><select id="level"><option>A2</option><option>B1</option><option>B2</option><option>C1</option></select><button id="help-toggle" class="text-button" aria-pressed="false" title="Abrir ayudas en inglés · Show English support">ES + EN</button><button id="theme-toggle" class="theme-toggle" aria-label="Cambiar a modo noche · Switch to dark mode" aria-pressed="false"><span class="theme-symbol" aria-hidden="true">☀</span><span class="theme-label">Día</span></button></div></header>
+    <header class="topbar"><span class="topbar-text">Aprender para vivir en español</span><div class="topbar-controls"><label for="level">Mi ruta</label><select id="level" aria-label="Mi ruta de aprendizaje"><option>A2</option><option>B1</option><option>B2</option><option>C1</option></select><button id="help-toggle" class="text-button" aria-pressed="false" title="Abrir ayudas en inglés · Show English support">ES + EN</button><button id="theme-toggle" class="theme-toggle" aria-label="Cambiar a modo noche · Switch to dark mode" aria-pressed="false"><span class="theme-symbol" aria-hidden="true">☀</span><span class="theme-label">Día</span></button></div></header>
+    <div id="storage-status" class="storage-status" role="status" hidden></div>
     <main id="main" tabindex="-1"></main>
     <footer>Hecho para practicar, equivocarse y seguir. <a href="#sources">Fuentes y alcance</a><span>El progreso se guarda en este navegador.</span></footer>
   </div>
   <div id="toast" role="status" aria-live="polite"></div>
-  <script type="module" src="./app.js?v=ff50ceb8ba34"></script>
+  <script type="module" src="./app.js?v=d9b04d29540c"></script>
 </body>
 </html>

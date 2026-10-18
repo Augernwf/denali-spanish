@@ -1,4 +1,4 @@
-import {a2LessonEnglish,a2Grammar} from './a2.js?v=ff50ceb8ba34';
+import {a2LessonEnglish,a2Grammar} from './a2.js?v=d9b04d29540c';
 // English explanations are study aids, not an alternative answer key.
 export const lessonEnglish={
  'b1-base':[
@@ -7,7 +7,7 @@ export const lessonEnglish={
  'Start with subject, verb and complements when you need a clear sentence. Spanish often leaves the subject pronoun out; add yo for contrast. Questions do not require an equivalent of English do. Written questions use both opening and closing marks.'
  ],
  'b1-presente':[
- 'Learn complete present-tense forms, not just infinitives. Stem changes often disappear in nosotros and vosotros: pienso but pensamos. Practise irregular first-person forms such as tengo, hago, sé and conozco so you can retrieve them quickly.',
+ 'Learn complete present-tense forms, not just infinitives. Stem changes often disappear in nosotros and vosotros: pienso but pensamos. Practise irregular first-person forms such as tengo, hago, sé and conozco so you can retrieve them quickly. Saber and conocer overlap in some contexts: both sé la respuesta and conozco la respuesta are grammatical.',
  'With reflexive verbs, the pronoun follows the person acting: me levanto. With gustar, the thing liked is the subject: me gustan las ciudades. Me or le identifies the person experiencing the feeling. A mí or a ella can clarify or contrast that person.',
  'The simple present describes habits. Estar + gerund describes an action in progress. Seguir adds continuation; llevar + time + gerund adds duration up to now; acabar de describes a recent action; volver a describes doing something again.'
  ],
@@ -133,6 +133,90 @@ export const lessonEnglish={
  ]
 };
 Object.assign(lessonEnglish,a2LessonEnglish);
+// Feedback follows the stable question order within each lesson, before option rotation.
+// Keep these arrays aligned when revising a prompt; answer positions and saved attempts stay intact.
+export const lessonQuizEnglish={
+ 'b1-base':[
+  'The question asks where an event takes place. Use ser for that location: la fiesta es en casa de Ana.',
+  'The instruction introduces the existence of two libraries, so use hay. Están would locate libraries already identified in a different context.',
+  'Agua is feminine. El is used immediately before its stressed initial a in the singular, but the adjective remains feminine: fría.',
+  'Existential haber stays singular in standard Spanish: había muchas personas. Personas does not control agreement in this construction.',
+  'A profession usually appears without an article after ser in this simple identification: soy profesora. Add an article in es una profesora excelente.',
+  'The film causes boredom, so it is aburrida. The adjective agrees with feminine película; estoy aburrida describes how a person feels.'
+ ],
+ 'b1-presente':[
+  'The stem change in puedo does not appear in nosotros or nosotras: podemos. The ending also agrees with the plural subject.',
+  'Las películas is the plural subject, so use gustan. Le identifies the person who likes them; it does not determine the verb ending.',
+  'Estar plus gerund presents an action in progress: estoy escribiendo. Use the gerund escribiendo after estar, rather than the infinitive escribir.',
+  'Acabar de plus infinitive describes a recent action: acabo de llegar means I have just arrived. The two-minute context supports that meaning.',
+  'Seguir plus gerund expresses continuation: sigo leyendo. The context says the reading started yesterday and has not finished.',
+  'The instruction specifically asks for saber: sé, with an accent. Conozco la respuesta is also grammatical, but uses conocer; the named verb makes this question unambiguous.'
+ ],
+ 'b1-pasados':[
+  'The instruction asks for sleeping in progress when the knock occurred. Dormía gives that background viewpoint. Mientras alone does not force the imperfect in every sentence.',
+  'The instruction asks for a completed visit in the preterite: fui. Ayer alone does not always decide between preterite and imperfect.',
+  'The instruction asks for a childhood routine viewed from within: iba. Fui could summarise a completed series of visits in a different narrative.',
+  'Conocí presents the first meeting as a completed event. Conocía normally describes an existing acquaintance; the question specifies the first encounter.',
+  'The whole twenty-year period is presented as bounded. A long duration can take the preterite; duration alone does not select the tense.',
+  'The question specifies third-person singular preterite of hacer: hizo. This irregular form has no written accent.'
+ ],
+ 'b1-perfectos':[
+  'With auxiliary haber, the participle stays unchanged: hemos escrito dos cartas. Escrito is irregular; it does not agree with cartas.',
+  'Mis amigas is the plural subject, so the auxiliary is habían. With salido it forms the pluperfect, placing departure before arrival.',
+  'Desde hace introduces a duration continuing to the present. Desde alone can introduce a starting point, such as desde 2024.',
+  'Hace dos años places the completed move two years before now. Contrast vivo aquí desde hace dos años for a continuing situation.',
+  'The participle of ver is visto. It stays unchanged after haber, regardless of the feminine object película.',
+  'Present-perfect and preterite usage varies by region and viewpoint. Hoy fui is normal in many varieties and is not automatically an error.'
+ ],
+ 'b1-futuro':[
+  'Tener uses the irregular future stem tendr-: tendré. The ending is added to that stem rather than to tener.',
+  'Podrías is a conditional form used to soften a request. It is followed by the infinitive hablar.',
+  'An open condition with si plus present can have a future consequence: si tengo tiempo, iré. The alternatives do not fit this sentence.',
+  'Estará locates a person and can express a guess about now. No sé dónde está gives the uncertainty that supports this reading.',
+  'Hay que plus infinitive expresses a general requirement: hay que reservar. It is an impersonal construction.',
+  'Me gustaría expresses a wish. The infinitive activity vivir cerca del mar functions as a singular subject, so use gustaría.'
+ ],
+ 'b1-pronombres':[
+  'Las replaces feminine plural direct object las entradas. Les is normally an indirect-object pronoun.',
+  'Lo replaces el libro. Le represents Ana and becomes se before lo: se lo di. The order is indirect object before direct object.',
+  'La replaces your sister as the direct object of vi. Personal a does not make a person an indirect object.',
+  'Pronouns can attach to an infinitive: contárselo. They can also precede the whole construction: se lo voy a contar.',
+  'Neuter lo can refer to an entire idea: that you had arrived. It does not refer to a feminine or masculine noun here.',
+  'Negative commands place pronouns before the subjunctive verb: no me lo cuentes. An affirmative command would be cuéntamelo.'
+ ],
+ 'b1-preposiciones':[
+  'The instruction asks for the goal of studying: para hablar means in order to speak. Por can express a motive elsewhere, but that is not the requested relationship.',
+  'Gracias por introduces the reason for thanks: gracias por venir. Learn the whole expression rather than translating English for separately.',
+  'Acordarse requires de: me acuerdo de ese día. Recordar has a different pattern: recuerdo ese día.',
+  'Depender requires de, and de plus el contracts to del: depende del tiempo disponible.',
+  'Estar acostumbrada a keeps a before an infinitive: acostumbrada a hablar. Learn the adjective with its preposition.',
+  'Para el viernes gives a deadline. Durante would describe a period in which something happens, rather than the requested deadline.'
+ ],
+ 'b1-describir':[
+  'Tanto modifies masculine singular noun tiempo and agrees with it. Tan modifies adjectives or adverbs instead.',
+  'Tan plus adjective plus como compares equal qualities: tan paciente como. Tanto is not used directly before this adjective.',
+  'Keep the preposition from hablé con esa persona when building the relative: la persona con la que hablé.',
+  'Más de plus a number means above that quantity. Twenty-five is more than twenty, so use más de veinte.',
+  'Before amiga, vieja can describe how long the friendship has lasted. It need not describe the friend’s age.',
+  'The relative without commas identifies friends who live here. It selects by that property; it does not state that all of your friends live here.'
+ ],
+ 'b1-sonido':[
+  'A specific checking question tests your interpretation: ¿Quieres decir que salimos mañana? It helps locate a misunderstanding.',
+  'Aim for a message the listener can understand clearly. Fluency does not require eliminating every feature of a foreign accent or speaking as fast as possible.',
+  'In general Spanish, written b and v do not represent the English b/v sound contrast. Spelling and pronunciation are different systems.',
+  'In día, stressed closed vowel í and open vowel a form a hiatus: dí-a. The accent marks the stressed closed vowel.',
+  'Naming the category and function lets you explain a missing word: a tool for opening a wine bottle. This keeps communication moving.',
+  'Seseo is a valid pronunciation pattern in many Spanish-speaking regions. Regional variation is not automatically a learner error.'
+ ],
+ 'b2-argumentar':[
+  'The instruction asks for a consequence, so use así que. Aunque could introduce a concession in another context, but that is a different relationship.',
+  'Es decir restates an idea to explain it. Por tanto gives a consequence and en cambio marks a contrast.',
+  'This example explicitly includes successes and failures. No siempre denies that something happens in every case; by itself it does not tell you the exact success rate.',
+  'En cambio contrasts the two alternatives. Porque supplies a cause and para que introduces a purpose.',
+  'Recognising a valid part of an objection and adjusting your position shows that you have understood the other person.',
+  'A personal example supports a statement about that case. On its own, it does not establish a rule for every person or situation.'
+ ]
+};
 export const topicEnglish={
  base:{rule:'Ser identifies or classifies; estar locates a person or object or presents a state; haber introduces existence. Permanent versus temporary does not cover all uses. Events use ser for location.',trap:'Existential haber stays singular: había problemas, hubo cambios, habrá oportunidades. Adjectives still agree with their nouns.',strategy:'Identify the subject if there is one. Decide whether you are identifying, locating or introducing something, then check gender and number.'},
  present:{rule:'With gustar, the liked thing is the subject: me gusta viajar, me gustan los viajes. The pronoun marks the experiencer. Verb combinations express stages such as beginning, continuing, stopping or doing something again.',trap:'Spanish uses the simple present for many habits where an English speaker may overuse the progressive. Learn each verb construction as a whole.',strategy:'Locate the real subject, pronoun and time expression. Compare a habit, an ongoing action and a duration, then write a personal example of each.'},
@@ -180,7 +264,7 @@ export const examEnglish={
  'Both las and se las are accepted. Las replaces the photos; se also represents the recipient and can coexist with a Ana. Le changes to se before las, so le las is not valid.',
  'Pronouns can precede the whole verb construction or attach to the infinitive: te lo voy a explicar / voy a explicártelo.',
  'A negative tú command uses subjunctive with the pronoun before it: no lo compres. The affirmative is cómpralo.',
- 'Para + infinitive introduces a purpose: with the aim of practising. Por would introduce a different relation.',
+ 'The instruction asks for a goal: para practicar means with the aim of practising. Por practicar could give a motive in another context; it is not wrong in every use.',
  'Depender requires de. Learn the verb and its preposition together rather than translating an English preposition separately.',
  'The relative keeps con from hablar con alguien. Con la que replaces the teacher without duplicating the complement.',
  'An equal-quality comparison uses tan + adjective + como. Más would require que; tanto has other comparison jobs.'
@@ -193,7 +277,7 @@ export const examEnglish={
  'Para que introduces a purpose and takes subjunctive. The subject differs from that of the main clause.',
  'With mañana and subjunctive, rain is an eventuality that does not cancel the plan. Aunque marks a concession.',
  'En aquel momento anchors being tired to the past statement, favouring imperfect estaba in this reported perspective.',
- 'A reported past request takes imperfect subjunctive. Both llamara and llamase are valid.',
+ 'The instruction asks for imperfect subjunctive in the first person: both llamara and llamase are valid. A reported request can use a different tense when the reporting time changes.',
  'Mañana meant Tuesday relative to Monday. Al día siguiente preserves that reference when the message is reported on Thursday.',
  'The perfect subjunctive presents a completed earlier action evaluated from the present.',
  'Reporting a request uses que plus subjunctive. Abriera and abriese are appropriate past forms in this frame.',
@@ -214,7 +298,7 @@ export const examEnglish={
  C1:[
  'No es que rejects an explanation with subjunctive. The speaker denies lack of willingness as the reason.',
  'Por muy + adjective + que introduces concession with subjunctive: usefulness is not enough to resolve everything.',
- 'In this context, the future perfect guesses about an action already completed. Context distinguishes this from a future completion.',
+ 'The current time, lack of confirmation and supongo establish a guess about something already completed. With a future reference such as para mañana, the same form could instead locate completion before a future point.',
  'No… sino… replaces the rejected reason with the alternative. This is correction, not simply any contrast.',
  'De + perfect infinitive can express a condition: de haber sabido corresponds here to si hubiera sabido.',
  'Que yo sepa limits the claim to the speaker’s available knowledge; the information may be incomplete.',
@@ -222,7 +306,7 @@ export const examEnglish={
  'The explicit plural subject ellos needs hubieran or hubiesen. The tense marks an action prior to the past regret.',
  'Iba a describes a past intention interrupted here by forgetting. The intention does not prove a completed call.',
  'Venir a + infinitive can express approximation. Costar and unos cien favour that meaning here.',
- 'The condition is past but the result is current. Conditional sería fits the consequence anchored by ahora.',
+ 'The instruction specifies yo, so the conditional form is sería. The condition is past and the result is current, anchored by ahora.',
  'Nada más + infinitive places the main event immediately after the subordinate one: first arrival, then the call.',
  'Alegrarse de needs de before a que clause. Me alegra que has a different structure and no de.',
  'Cuyos agrees with masculine plural libros, the possessed items, rather than with the feminine owner.',
